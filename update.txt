@@ -1,0 +1,293 @@
+================================================================
+UPDATE LOG - QC AUTOMATION SYSTEM
+================================================================
+
+Document: update.txt
+Current Version: 2.0.0
+Date: 2026-01-15
+
+This file tracks all changes made to the system.
+
+================================================================
+LATEST UPDATE: VERSION 2.0.0 (Major Restructure)
+================================================================
+
+Date: 2026-01-15
+Type: Major Update
+
+SUMMARY:
+--------
+Complete restructure of the QC system with flexible form handling,
+scoring out of 25, single login access, and automated email bot.
+
+================================================================
+DETAILED CHANGES
+================================================================
+
+1. FLEXIBLE FORM STRUCTURE
+--------------------------
+BEFORE: 
+- Fixed questions in exact positions
+- Adding/removing questions required code changes
+- Column positions hardcoded (row[6], row[7], etc.)
+
+AFTER:
+- Dynamic header reading
+- Add/remove questions without code changes
+- Columns identified by keywords, not position
+- Works with any form structure
+
+FILES CHANGED:
+- Created: dynamicProcessor.gs (replaces dataProcessor.gs)
+- Updated: config.gs (added SCORE_KEYWORDS, COLUMN_KEYWORDS)
+
+HOW IT WORKS:
+- Script reads header row first
+- Identifies score columns by keywords (score, rating, quality, etc.)
+- Identifies other columns (instructor, course, date) by keywords
+- Processes data based on column TYPE, not position
+
+----------------------------------------------------------------
+
+2. SCORING OUT OF 25 (SUM, NOT AVERAGE)
+---------------------------------------
+BEFORE:
+- Each linear scale: 1-5
+- AVERAGED to single 1-5 score
+- Display: "4.2 / 5"
+
+AFTER:
+- Each linear scale: 1-5
+- SUMMED for total score
+- Display: "21 / 25 (84%)"
+
+FILES CHANGED:
+- dynamicProcessor.gs: calculateTotalScore() function
+- emailBot.gs: Report HTML templates
+- dashboard.js: Score display logic
+
+CALCULATION LOGIC:
+- Find all columns with score keywords
+- Sum their values (1-5 each)
+- Max = count × 5
+- Example: 5 questions × 5 max = 25 max score
+
+AUTOMATIC ADJUSTMENT:
+- Add 6th rating question → max becomes 30
+- Remove a question → max adjusts automatically
+- No code changes needed!
+
+----------------------------------------------------------------
+
+3. SINGLE LOGIN ACCESS (DEPARTMENT LEAD ONLY)
+---------------------------------------------
+BEFORE:
+- Multiple user accounts
+- QC team had edit access
+- Faculty had view access
+- Complex permission management
+
+AFTER:
+- ONLY Department Lead has login
+- No other accounts needed
+- Forms are public (anyone can submit)
+- Faculty receive email reports (no login)
+
+ACCESS MODEL:
+┌─────────────────┬────────────┬───────────────────────┐
+│ Role            │ Login?     │ How They Interact     │
+├─────────────────┼────────────┼───────────────────────┤
+│ Department Lead │ YES        │ Full system access    │
+│ QC Team         │ NO         │ Submit forms only     │
+│ Faculty         │ NO         │ Receive emails only   │
+│ Students        │ NO         │ Submit feedback forms │
+└─────────────────┴────────────┴───────────────────────┘
+
+BENEFITS:
+- Simpler security
+- No password management
+- Single point of accountability
+- Easier auditing
+
+----------------------------------------------------------------
+
+4. EMAIL BOT WITH GMAIL ACCESS
+------------------------------
+BEFORE:
+- Manual email sending
+- Generic reports
+- QC Lead sent all emails
+
+AFTER:
+- Automated email bot
+- Personalized reports to each faculty
+- Triggered automatically on form submit
+- Weekly summaries sent automatically
+
+FILES CHANGED:
+- Created: emailBot.gs (new file)
+- Updated: config.gs (EMAIL_SETTINGS)
+
+EMAIL TYPES:
+1. Observation Report (immediate) → Specific faculty
+2. Weekly Summary (Monday) → All faculty + Lead
+3. Low Score Alert (immediate) → Lead only
+4. Monthly Report (1st of month) → Lead
+
+EMAIL CONTENT:
+- Score displayed as X/25 (not X/5)
+- Percentage shown
+- Status with emoji (🌟 Excellent, ✅ Good, etc.)
+- Score breakdown table
+- Feedback details (strengths, improvements)
+
+----------------------------------------------------------------
+
+5. FACULTY EMAIL LIST SECURITY
+------------------------------
+BEFORE:
+- Emails could be anywhere
+- No standard storage
+
+AFTER:
+- Faculty emails in config.gs (can move to GitHub Secrets)
+- JSON format for easy updates
+- Name matching (exact and partial)
+
+FORMAT:
+{
+  "Dr. Smith": "smith@university.edu",
+  "Dr. Jones": "jones@university.edu"
+}
+
+SECURITY OPTIONS:
+1. Store in config.gs (simple)
+2. Store in GitHub Secrets (more secure)
+3. Store in separate protected sheet (alternative)
+
+----------------------------------------------------------------
+
+6. DOCUMENTATION RESTRUCTURE
+----------------------------
+CREATED:
+- README.md: Complete system overview with architecture
+- installation.txt: Step-by-step installation for non-technical users
+- changesmade.txt: This file - explains all changes
+
+REMOVED:
+- INSTRUCTIONS.txt: Replaced by installation.txt
+- Multiple redundant documentation files
+
+INSTALLATION.TXT SECTIONS:
+1. What You Need Before Starting
+2. Creating the Google Sheet
+3. Creating Google Forms
+4. Setting Up Google Apps Script
+5. Setting Up GitHub Repository
+6. Adding Faculty Email List (GitHub Secrets)
+7. Deploying the Dashboard
+8. Testing the System
+9. Troubleshooting
+10. Daily Usage Guide
+
+================================================================
+FILE CHANGES SUMMARY
+================================================================
+
+NEW FILES:
+----------
+□ README.md (root) - Main documentation
+□ installation.txt - Complete setup guide
+□ changesmade.txt - This file
+□ public/scripts/dynamicProcessor.gs - Flexible form handler
+□ public/scripts/emailBot.gs - Email automation
+
+UPDATED FILES:
+--------------
+□ public/scripts/config.gs - New settings structure
+□ public/scripts/dashboard.gs - Updated API
+□ public/dashboard/dashboard.js - Score display X/25
+
+REMOVED/REPLACED:
+-----------------
+□ public/scripts/dataProcessor.gs → dynamicProcessor.gs
+□ public/scripts/main.gs → Merged into others
+□ public/INSTRUCTIONS.txt → installation.txt
+□ update.txt (old) → This new version
+
+================================================================
+MIGRATION FROM 1.0 TO 2.0
+================================================================
+
+If you have Version 1.0 installed:
+
+STEP 1: BACKUP
+□ Download all Google Sheets as Excel
+□ Export current Apps Script code
+□ Save all form links
+
+STEP 2: UPDATE SCRIPTS
+□ Open Apps Script editor
+□ Delete old files: main.gs, dataProcessor.gs
+□ Create new files: dynamicProcessor.gs, emailBot.gs
+□ Update config.gs with new settings
+□ Keep your SPREADSHEET_ID
+
+STEP 3: ADD FACULTY EMAILS
+□ Add FACULTY_EMAILS object to config.gs
+□ Match names EXACTLY to form dropdown options
+□ Add real email addresses
+
+STEP 4: UPDATE TRIGGERS
+□ Delete old triggers
+□ Add: onFormSubmit (on form submit)
+□ Add: sendWeeklySummary (weekly, Monday)
+□ Add: sendMonthlyReport (monthly, 1st)
+
+STEP 5: UPDATE DASHBOARD
+□ Upload new dashboard files
+□ Update API_URL
+□ Verify score displays as X/25
+
+STEP 6: TEST
+□ Submit test form
+□ Verify email received
+□ Check score calculation
+
+================================================================
+KNOWN ISSUES & LIMITATIONS
+================================================================
+
+1. Gmail Sending Limits
+   - Free accounts: 100 emails/day
+   - Google Workspace: 2000 emails/day
+   - Large departments may hit limits
+
+2. Faculty Name Matching
+   - Names in form MUST match FACULTY_EMAILS keys
+   - Partial matching supported but exact is better
+
+3. Score Columns
+   - Must contain keywords: score, rating, quality, (1-5)
+   - If header doesn't match, won't be counted
+
+4. Form Changes
+   - After adding questions, existing data unaffected
+   - New calculations apply to new submissions only
+   - Run reprocessAllData() to recalculate historical
+
+================================================================
+CONTACT
+================================================================
+
+For issues with this update:
+- Check installation.txt Section 9 (Troubleshooting)
+- Contact IT Support
+- Review Apps Script execution logs
+
+Document Version: 2.0.0
+Last Updated: 2026-01-15
+
+================================================================
+END OF UPDATE LOG
+================================================================

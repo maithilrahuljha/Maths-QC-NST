@@ -1,0 +1,9 @@
+Date,Course_Code,Instructor_Name,Session_Type,Topic,Students_Present,Correctness_Score,Delivery_Score,Engagement_Score,Board_Work_Score,Pace_Score,Rehearsed,Readiness_Complete,Content_Errors,Tangents_Observed,Strengths,Areas_Improvement,Priority,Recommended_Action,Owner,Review_Date,Status
+2026-01-15,MATH101,Dr. Smith,Lecture,Introduction to Limits,45,5,4,4,5,4,Yes,Yes,0,No,Clear explanations; good examples,More practice problems,Medium,Add 3 more worked examples,Dr. Smith,2026-01-22,Open
+2026-01-14,MATH201,Dr. Jones,Lecture,Differential Equations,38,4,4,3,4,4,Yes,Yes,0,No,Strong theoretical foundation,Increase student interaction,Medium,Include group exercises,Dr. Jones,2026-01-21,Open
+2026-01-14,MATH102,Dr. Williams,Lab,MATLAB Introduction,25,5,5,5,5,5,Yes,Yes,0,No,Excellent hands-on approach,N/A,Low,Continue current approach,Dr. Williams,2026-01-21,Resolved
+2026-01-13,MATH301,Dr. Brown,Lecture,Real Analysis,32,3,4,3,3,4,No,No,2,Yes,Good pace management,Needs rehearsal; fix notation errors,High,Mandatory rehearsal before next session,Dr. Brown,2026-01-15,In Progress
+2026-01-13,MATH201,Prof. Johnson,Lecture,Linear Algebra,42,4,5,4,4,5,Yes,Yes,0,No,Engaging delivery; clear visuals,Could add more applications,Low,Research industry applications,Prof. Johnson,2026-01-20,Open
+2026-01-12,MATH401,Prof. Wilson,Seminar,Topology Fundamentals,18,5,5,5,5,5,Yes,Yes,0,No,Expert-level content; great discussion,Smaller group would be better,Low,Consider splitting seminar,Prof. Wilson,2026-01-19,Resolved
+2026-01-12,MATH102,Dr. Davis,Lecture,Basic Statistics,48,4,4,4,4,4,Yes,Yes,1,No,Good visual aids,Minor calculation error on slide 15,Medium,Correct slide and redistribute,Dr. Davis,2026-01-15,In Progress
+2026-01-11,MATH301,Prof. Taylor,Lecture,Complex Analysis,28,5,4,4,5,4,Yes,Yes,0,No,Thorough coverage,Pace slightly fast for some,Low,Add summary slides,Prof. Taylor,2026-01-18,Open

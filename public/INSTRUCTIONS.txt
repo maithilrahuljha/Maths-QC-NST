@@ -1,0 +1,2591 @@
+================================================================
+MATHEMATICS DEPARTMENT QC AUTOMATION SYSTEM
+COMPLETE SETUP INSTRUCTIONS FOR NON-TECHNICAL USERS
+================================================================
+
+Version: 1.0
+Last Updated: 2026-01-15
+For: Faculty and Staff
+Purpose: Step-by-step guide to set up and operate the QC system
+
+================================================================
+SECTION 1: BEFORE YOU BEGIN
+================================================================
+
+1.1 What You Need:
+□ A computer with internet access
+□ Google Workspace account (company-provided email)
+□ Basic knowledge of Google Sheets and Forms
+□ 30-60 minutes for initial setup
+□ The files provided in this package
+
+1.2 What This System Does:
+- Tracks quality of teaching in Mathematics department
+- Collects feedback from students
+- Monitors exam and assessment quality
+- Tracks research projects
+- Shows real-time dashboard with quality metrics
+- Sends automatic email reports
+
+1.3 Who Will Use This:
+- QC Team Members: Enter observation data
+- Instructors: View their performance metrics
+- Department Head: Monitor overall quality
+- Students: Submit feedback
+
+================================================================
+SECTION 2: GOOGLE ACCOUNT SETUP
+================================================================
+
+2.1 Login to Google:
+1. Open your web browser (Google Chrome recommended)
+2. Go to https://mail.google.com
+3. Sign in with your company-provided email
+4. If you don't have an account, contact IT department
+
+2.2 Create Required Folders:
+1. Click the "New" button in Google Drive
+2. Select "Folder"
+3. Name it: "Mathematics_QC_System"
+4. Click "Create"
+5. Create sub-folders:
+   - "Forms"
+   - "Sheets"
+   - "Reports"
+
+================================================================
+SECTION 3: GOOGLE SHEETS SETUP
+================================================================
+
+3.1 Create 8 Google Sheets:
+
+IMPORTANT: Follow these steps EXACTLY for each sheet:
+
+STEP 1: Create New Sheet
+1. Click "New" button
+2. Choose "Google Sheets"
+3. Click "Blank spreadsheet"
+
+STEP 2: Name Your Sheet
+1. Click "Untitled spreadsheet" at the top
+2. Type the exact name as listed below
+3. Press Enter
+
+STEP 3: Add Column Headers
+1. Copy the headers listed below
+2. Right-click the first column (A)
+3. Click "Paste"
+
+STEP 4: Format Headers
+1. Select the header row
+2. Click "B" (Bold) button
+3. Click the paint bucket icon
+4. Choose a light blue color
+
+================================================================
+SHEET 1: Dashboard_Summary
+================================================================
+Headers:
+Metric	Current_Week	Last_Week	Change_Percent	Target	Status	Trend_Icon
+
+Example data to test:
+Lecture Readiness Score	8.5	7.8	9%	8.5	✅	↑
+Rehearsal Compliance	92%	85%	8%	95%	⚠️	↑
+Content Error Rate	0.5	1.2	-58%	0.5	✅	↓
+Exam Error Rate	0	0.3	-100%	0	✅	↓
+Feedback Implementation	85%	70%	21%	90%	⚠️	↑
+
+================================================================
+SHEET 2: Lecture_Observations
+================================================================
+Headers:
+Date	Course_Code	Instructor_Name	Session_Type	Topic	Students_Present	Correctness_Score	Delivery_Score	Engagement_Score	Board_Work_Score	Pace_Score	Rehearsed	Readiness_Complete	Content_Errors	Tangents_Observed	Strengths	Areas_Improvement	Priority	Recommended_Action	Owner	Review_Date	Status
+
+================================================================
+SHEET 3: Assessment_QC
+================================================================
+Headers:
+Date	Assessment_Type	Course_Code	Reviewer	Questions_Reviewed	Correct_Answers	Incorrect_Answers	Typo_Errors	Syllabus_Coverage	Difficulty_Appropriate	Rubric_Adherence	Scripts_Sampled	Marking_Errors	Escalation_Required	Final_Decision	Comments
+
+================================================================
+SHEET 4: Research_QC
+================================================================
+Headers:
+Project_ID	Title	Student_Names	Faculty_Mentor	Research_Category	Submission_Date	Originality_Score	Literature_Review_Score	Methodology_Score	Data_Analysis_Score	Presentation_Score	Plagiarism_Detected	Current_Stage	Mentor_Meetings	Paper_Submitted	Publication_Journal	Patent_Filed	Strengths	Weaknesses	Mentor_Recommendations	Status
+
+================================================================
+SHEET 5: Student_Feedback
+================================================================
+Headers:
+Date	Course_Code	Batch	Instructor_Name	Month	Subject_Knowledge	Teaching_Clarity	Engagement_Level	Approachability	Punctuality	What_Works	Improvements	Additional_Comments
+
+================================================================
+SHEET 6: Action_Items
+================================================================
+Headers:
+Issue_ID	Date	Issue_Type	Severity	Description	Assigned_To	Target_Date	Status	Resolution_Notes	Actual_Completion	Verified_By
+
+================================================================
+SHEET 7: QC_Failures
+================================================================
+Headers:
+Date	Failure_Case	QC_Response	Severity	Resolution_Date	Repeated	Escalated
+
+================================================================
+SHEET 8: Performance_Trends
+================================================================
+Headers:
+Week	Lectures_Observed	Avg_Score	Pass_Rate	Error_Count	Actions_Resolved	Research_Projects	Student_Satisfaction
+
+================================================================
+3.2 Sheet Settings (Important!)
+================================================================
+
+For EACH sheet, do this:
+
+1. Click "Data" menu
+2. Select "Named ranges"
+3. Click "Add named range"
+4. In "Name" type: [SheetName]_Data (e.g., Lecture_Data)
+5. In "Range" select all your header cells
+6. Click "Done"
+
+This allows the dashboard to find your data.
+
+3.3 Share Sheets with Team:
+
+1. Click "Share" button (top right)
+2. Type email addresses of QC team members
+3. Choose "Can edit" for QC Lead
+4. Choose "Can view" for instructors
+5. Click "Send"
+
+================================================================
+SECTION 4: GOOGLE FORMS SETUP
+================================================================
+
+4.1 Create 5 Google Forms:
+
+STEP 1: Create New Form
+1. In Google Drive, click "New"
+2. Select "More"
+3. Choose "Google Forms"
+4. Click "Blank form"
+
+STEP 2: Name Your Form
+1. Click "Untitled form"
+2. Type the exact name listed
+3. Click outside the text box
+
+STEP 3: Add Questions
+IMPORTANT: Each question must be added EXACTLY as shown!
+
+For each question:
+1. Click "+" (Add question) button
+2. Select the question type from the dropdown
+3. Type the exact question text
+4. Click "Required" switch (must be ON)
+
+================================================================
+FORM 1: Lecture/Lab Observation
+================================================================
+
+Questions to add (in this exact order):
+
+1. Question: "Date of Observation"
+   Type: Date
+   Required: Yes
+
+2. Question: "Course Code"
+   Type: Dropdown
+   Options: M1, M2, M3
+   Required: Yes
+
+3. Question: "Instructor Name"
+   Type: Dropdown
+   Options: (Add all instructor names)
+   Required: Yes
+
+4. Question: "Session Type"
+   Type: Multiple choice
+   Options: Lecture, Lab
+   Required: Yes
+
+5. Question: "Topic Covered"
+   Type: Paragraph
+   Required: Yes
+
+6. Question: "Number of Students Present"
+   Type: Number
+   Required: Yes
+
+7. Question: "Academic Correctness (1=Poor, 5=Excellent)"
+   Type: Linear scale
+   Range: 1 to 5
+   Labels: 1=Poor, 5=Excellent
+   Required: Yes
+
+8. Question: "Delivery Quality (1=Poor, 5=Excellent)"
+   Type: Linear scale
+   Range: 1 to 5
+   Labels: 1=Poor, 5=Excellent
+   Required: Yes
+
+9. Question: "Student Engagement (1=Poor, 5=Excellent)"
+   Type: Linear scale
+   Range: 1 to 5
+   Labels: 1=Poor, 5=Excellent
+   Required: Yes
+
+10. Question: "Board Work Quality (1=Poor, 5=Excellent)"
+    Type: Linear scale
+    Range: 1 to 5
+    Labels: 1=Poor, 5=Excellent
+    Required: Yes
+
+11. Question: "Pace Management (1=Poor, 5=Excellent)"
+    Type: Linear scale
+    Range: 1 to 5
+    Labels: 1=Poor, 5=Excellent
+    Required: Yes
+
+12. Question: "Was session rehearsed before delivery?"
+    Type: Multiple choice
+    Options: Yes, No
+    Required: Yes
+
+13. Question: "Was readiness checklist complete?"
+    Type: Multiple choice
+    Options: Yes, No
+    Required: Yes
+
+14. Question: "Number of content errors found"
+    Type: Number
+    Required: Yes
+
+15. Question: "Were there any tangents or off-topic discussions?"
+    Type: Multiple choice
+    Options: Yes, No
+    Required: Yes
+
+16. Question: "Strengths observed"
+    Type: Paragraph
+    Required: No
+
+17. Question: "Areas for improvement"
+    Type: Paragraph
+    Required: Yes
+
+18. Question: "Priority Level"
+    Type: Dropdown
+    Options: High, Medium, Low
+    Required: Yes
+
+19. Question: "Recommended action"
+    Type: Paragraph
+    Required: Yes
+
+20. Question: "Action Owner"
+    Type: Short answer
+    Required: Yes
+
+21. Question: "Review Date"
+    Type: Date
+    Required: Yes
+
+================================================================
+FORM 2: Assessment QC
+================================================================
+
+Questions (in this order):
+
+1. "Date of Review" - Date
+2. "Assessment Type" - Dropdown (Exam, Quiz, Assignment, Project)
+3. "Course Code" - Dropdown (M1, M2, M3)
+4. "Reviewer Name" - Short answer
+5. "Total Questions Reviewed" - Number
+6. "Correct Answers" - Number
+7. "Incorrect Answers" - Number
+8. "Typo/Format Errors Found" - Number
+9. "Syllabus Coverage Percentage" - Number (0-100)
+10. "Difficulty Level Appropriate?" - Multiple choice (Yes/No)
+11. "Rubric Followed?" - Multiple choice (Yes/No)
+12. "Scripts Sampled" - Number
+13. "Marking Errors Found" - Number
+14. "Escalation Required?" - Multiple choice (Yes/No)
+15. "Final Decision" - Dropdown (Pass, Need Revision, Rejected)
+16. "Reviewer Comments" - Paragraph
+
+================================================================
+FORM 3: Research QC
+================================================================
+
+Questions (in this order):
+
+1. "Date" - Date
+2. "Project Title" - Short answer
+3. "Student Names" - Short answer
+4. "Faculty Mentor" - Dropdown (Add mentor names)
+5. "Research Category" - Dropdown (Pure, Applied, Interdisciplinary)
+6. "Submission Date" - Date
+7. "Originality Score (%)" - Number (0-100)
+8. "Literature Review Quality" - Linear scale (1-5)
+9. "Methodology Robustness" - Linear scale (1-5)
+10. "Data Analysis Quality" - Linear scale (1-5)
+11. "Presentation Quality" - Linear scale (1-5)
+12. "Plagiarism Detected?" - Multiple choice (Yes/No)
+13. "Current Stage" - Dropdown (Idea, Literature, Design, Experiment, Analysis, Publication, Innovation)
+14. "Mentor Meetings Conducted" - Number
+15. "Paper Submitted?" - Multiple choice (Yes/No)
+16. "Publication Journal (if applicable)" - Short answer
+17. "Patent Filed?" - Multiple choice (Yes/No)
+18. "Strengths" - Paragraph
+19. "Weaknesses" - Paragraph
+20. "Mentor Recommendations" - Paragraph
+
+================================================================
+FORM 4: Student Feedback
+================================================================
+
+Questions (in this order):
+
+1. "Date" - Date
+2. "Course Code" - Dropdown (M1, M2, M3)
+3. "Batch" - Short answer
+4. "Instructor Name" - Dropdown (All instructors)
+5. "Month" - Month picker
+6. "Subject Knowledge" - Linear scale (1-5)
+7. "Teaching Clarity" - Linear scale (1-5)
+8. "Engagement Level" - Linear scale (1-5)
+9. "Approachability" - Linear scale (1-5)
+10. "Punctuality" - Linear scale (1-5)
+11. "What's Working Well?" - Paragraph
+12. "Suggested Improvements" - Paragraph
+13. "Additional Comments" - Paragraph
+
+================================================================
+FORM 5: Action Tracker
+================================================================
+
+Questions (in this order):
+
+1. "Date" - Date
+2. "Issue Type" - Dropdown (Academic Error, Delivery Issue, Assessment Error, Research Issue, Process Issue)
+3. "Severity" - Dropdown (Critical, High, Medium, Low)
+4. "Description" - Paragraph
+5. "Assigned To" - Short answer
+6. "Target Date" - Date
+7. "Status" - Dropdown (Open, In Progress, Resolved, Deferred)
+8. "Resolution Notes" - Paragraph
+9. "Verified By" - Short answer
+
+================================================================
+4.2 Connect Forms to Sheets
+================================================================
+
+For EACH form:
+
+1. Click the "Responses" tab at the top
+2. Click the Google Sheets icon (green grid)
+3. Choose "Select existing spreadsheet"
+4. Navigate to and select your sheet
+5. Click "Select"
+6. Click "Create"
+
+IMPORTANT: The form responses will automatically appear in the sheet.
+
+4.3 Form Settings
+
+For all forms, do this:
+
+1. Click "Settings" (gear icon)
+2. Make sure "Collect email addresses" is OFF
+3. Under "Responses", choose "Respondents can see summary of responses" OFF
+4. Under "Presentation", uncheck "Show link to submit another response"
+5. Click "Save"
+
+4.4 Share Form Links
+
+1. Click "Send" button at the top
+2. Click the link icon (chain link)
+3. Click "Copy link"
+4. Save the link in the "Links" document provided
+
+
+================================================================
+================================================================
+SECTION 5: GOOGLE APPS SCRIPT SETUP (DETAILED)
+================================================================
+================================================================
+
+This section explains how to add the automation code to your
+Google Sheets. Follow each step carefully.
+
+================================================================
+5.1 OPENING THE SCRIPT EDITOR
+================================================================
+
+STEP 1: Open your Google Sheet
+---------------------------------
+   a) Go to Google Drive (https://drive.google.com)
+   b) Find your "Mathematics_QC_Master" spreadsheet
+   c) Double-click to open it
+   d) Make sure you see all 8 sheet tabs at the bottom
+
+STEP 2: Open Apps Script
+---------------------------------
+   a) Look at the top menu bar
+   b) Click on "Extensions" (between "Tools" and "Help")
+   c) A dropdown menu appears
+   d) Click on "Apps Script"
+   
+   ⏳ WAIT: A new browser tab will open
+   
+   e) You should now see:
+      - A dark sidebar on the left
+      - A code area in the middle (with some default code)
+      - The title "Untitled project" at the top
+
+STEP 3: Name Your Project
+---------------------------------
+   a) Click on "Untitled project" at the top left
+   b) Type: "Mathematics_QC_System"
+   c) Press Enter or click outside the text box
+   d) The name should now show "Mathematics_QC_System"
+
+   ✅ SUCCESS: You now have the script editor open!
+
+TROUBLESHOOTING:
+   ❌ "Extensions" menu not visible?
+      → Make sure you're logged in with your work account
+      → Try refreshing the page
+   
+   ❌ "Apps Script" option greyed out?
+      → Your organization may have restricted this
+      → Contact IT support
+
+================================================================
+5.2 UNDERSTANDING THE SCRIPT EDITOR LAYOUT
+================================================================
+
+Before we add code, let's understand the layout:
+
+┌─────────────────────────────────────────────────────────────┐
+│  [Project Name]                              [Deploy] [Run] │
+├──────────────┬──────────────────────────────────────────────┤
+│              │                                              │
+│  📁 Files    │   // Code appears here                       │
+│  ├─ Code.gs  │   function myFunction() {                    │
+│              │                                              │
+│  ⏰ Triggers │   }                                          │
+│              │                                              │
+│  📋 Execut.  │                                              │
+│              │                                              │
+│  ⚙️ Settings │                                              │
+│              │                                              │
+└──────────────┴──────────────────────────────────────────────┘
+
+LEFT SIDEBAR:
+- 📁 Files: Shows all script files (we'll add 5 more)
+- ⏰ Triggers: Where we set up automation (Section 5.6)
+- 📋 Executions: Shows when scripts ran
+- ⚙️ Settings: Project settings
+
+TOP BAR:
+- Deploy: Makes the script available (Section 5.8)
+- Run: Runs the selected function
+- Debug: For testing
+
+================================================================
+5.3 CREATING SCRIPT FILES
+================================================================
+
+You need to create 5 script files. Here's how to create each one:
+
+-----------------------------------------------------------------
+CREATING A NEW FILE:
+-----------------------------------------------------------------
+
+   a) In the left sidebar, look for "Files"
+   b) Hover your mouse over "Files"
+   c) A "+" icon appears - click on it
+   d) Select "Script" from the dropdown
+   e) A new file appears named "Untitled.gs"
+   f) The cursor is ready for you to type the name
+   g) Type the file name (without .gs extension)
+   h) Press Enter
+
+-----------------------------------------------------------------
+CREATE THESE 5 FILES (one by one):
+-----------------------------------------------------------------
+
+FILE 1: config
+   → Click "+" next to Files
+   → Select "Script"
+   → Type: config
+   → Press Enter
+   → You now have "config.gs"
+
+FILE 2: dataProcessor
+   → Click "+" next to Files
+   → Select "Script"
+   → Type: dataProcessor
+   → Press Enter
+   → You now have "dataProcessor.gs"
+
+FILE 3: dashboard
+   → Click "+" next to Files
+   → Select "Script"
+   → Type: dashboard
+   → Press Enter
+   → You now have "dashboard.gs"
+
+FILE 4: emailReports
+   → Click "+" next to Files
+   → Select "Script"
+   → Type: emailReports
+   → Press Enter
+   → You now have "emailReports.gs"
+
+FILE 5: automation
+   → Click "+" next to Files
+   → Select "Script"
+   → Type: automation
+   → Press Enter
+   → You now have "automation.gs"
+
+-----------------------------------------------------------------
+DELETE THE ORIGINAL FILE:
+-----------------------------------------------------------------
+
+   a) You should still have "Code.gs" from the beginning
+   b) Right-click on "Code.gs"
+   c) Select "Delete" or "Remove"
+   d) Confirm if asked
+
+-----------------------------------------------------------------
+YOUR FILES SHOULD NOW LOOK LIKE:
+-----------------------------------------------------------------
+
+📁 Files
+├─ config.gs
+├─ dataProcessor.gs
+├─ dashboard.gs
+├─ emailReports.gs
+└─ automation.gs
+
+   ✅ SUCCESS: You have created all 5 files!
+
+================================================================
+5.4 COPYING CODE INTO EACH FILE
+================================================================
+
+Now you need to copy code from the provided files into each
+script file. Follow these steps for EACH file:
+
+-----------------------------------------------------------------
+GENERAL STEPS (repeat for each file):
+-----------------------------------------------------------------
+
+STEP 1: Open the source code file
+   a) Go to the project folder on your computer
+   b) Navigate to: public/scripts/
+   c) Find the matching .gs file
+   d) Open it with Notepad (Windows) or TextEdit (Mac)
+      → Right-click the file
+      → Select "Open with"
+      → Choose Notepad or TextEdit
+
+STEP 2: Select all the code
+   a) Click inside the file content
+   b) Press Ctrl+A (Windows) or Cmd+A (Mac)
+   c) All text should be highlighted/selected
+
+STEP 3: Copy the code
+   a) Press Ctrl+C (Windows) or Cmd+C (Mac)
+   b) The code is now in your clipboard
+
+STEP 4: Paste into Apps Script
+   a) Go back to the Apps Script tab in your browser
+   b) Click on the corresponding file name in the sidebar
+   c) The code area on the right shows the file content
+   d) Select all existing code: Ctrl+A or Cmd+A
+   e) Delete it by pressing Backspace or Delete key
+   f) Paste your code: Ctrl+V or Cmd+V
+   g) The code should appear in the editor
+
+STEP 5: Save the file
+   a) Press Ctrl+S (Windows) or Cmd+S (Mac)
+   b) OR click the floppy disk icon 💾 in the toolbar
+   c) Wait for "Saving..." to complete
+
+-----------------------------------------------------------------
+DO THIS FOR EACH FILE:
+-----------------------------------------------------------------
+
+1️⃣ config.gs
+   Source: public/scripts/config.gs
+   → Open config.gs in Apps Script
+   → Delete existing content
+   → Paste code from public/scripts/config.gs
+   → Save (Ctrl+S)
+
+2️⃣ dataProcessor.gs
+   Source: public/scripts/dataProcessor.gs
+   → Open dataProcessor.gs in Apps Script
+   → Delete existing content
+   → Paste code from public/scripts/dataProcessor.gs
+   → Save (Ctrl+S)
+
+3️⃣ dashboard.gs
+   Source: public/scripts/dashboard.gs
+   → Open dashboard.gs in Apps Script
+   → Delete existing content
+   → Paste code from public/scripts/dashboard.gs
+   → Save (Ctrl+S)
+
+4️⃣ emailReports.gs
+   Source: public/scripts/emailReports.gs
+   → Open emailReports.gs in Apps Script
+   → Delete existing content
+   → Paste code from public/scripts/emailReports.gs
+   → Save (Ctrl+S)
+
+5️⃣ automation.gs
+   Source: public/scripts/automation.gs
+   → Open automation.gs in Apps Script
+   → Delete existing content
+   → Paste code from public/scripts/automation.gs
+   → Save (Ctrl+S)
+
+-----------------------------------------------------------------
+VERIFICATION:
+-----------------------------------------------------------------
+
+After pasting all files, verify:
+□ Each file has code (not empty)
+□ No red error underlines in the code
+□ All 5 files are saved (no dots next to names)
+
+   ✅ SUCCESS: All code has been copied!
+
+================================================================
+5.5 CONFIGURING YOUR SETTINGS
+================================================================
+
+Now you need to update the config.gs file with YOUR specific
+information. This is very important!
+
+-----------------------------------------------------------------
+STEP 1: Open config.gs
+-----------------------------------------------------------------
+   a) Click on "config.gs" in the left sidebar
+   b) The code appears in the editor
+
+-----------------------------------------------------------------
+STEP 2: Find Your Spreadsheet ID
+-----------------------------------------------------------------
+   a) Open your Google Sheet in another tab
+   b) Look at the URL in your browser's address bar
+   c) The URL looks like this:
+   
+      https://docs.google.com/spreadsheets/d/XXXXXXXXXXXXX/edit
+                                             ↑↑↑↑↑↑↑↑↑↑↑↑↑
+                                             THIS IS YOUR ID
+   
+   d) Copy the long string of letters and numbers between /d/ and /edit
+   
+   Example URL:
+   https://docs.google.com/spreadsheets/d/1aBcDeFgHiJkLmNoPqRsTuVwXyZ/edit
+   
+   Your ID would be: 1aBcDeFgHiJkLmNoPqRsTuVwXyZ
+
+-----------------------------------------------------------------
+STEP 3: Update the Spreadsheet ID in config.gs
+-----------------------------------------------------------------
+   a) In config.gs, find this line (around line 15):
+   
+      const SPREADSHEET_ID = '[SPREADSHEET_ID]';
+   
+   b) Replace [SPREADSHEET_ID] with your actual ID
+   c) Keep the quotes! It should look like:
+   
+      const SPREADSHEET_ID = '1aBcDeFgHiJkLmNoPqRsTuVwXyZ';
+
+-----------------------------------------------------------------
+STEP 4: Update Email Addresses
+-----------------------------------------------------------------
+   Find the EMAIL_CONFIG section (around line 30) and update:
+
+   a) Find: QC_LEAD: '[QC_LEAD_EMAIL]'
+      Replace with your QC Lead's email:
+      QC_LEAD: 'john.smith@university.edu'
+
+   b) Find: DEPARTMENT_HEAD: '[DEPARTMENT_HEAD_EMAIL]'
+      Replace with your Department Head's email:
+      DEPARTMENT_HEAD: 'jane.doe@university.edu'
+
+   c) Find: IT_SUPPORT: '[IT_SUPPORT_EMAIL]'
+      Replace with your IT Support email:
+      IT_SUPPORT: 'it.help@university.edu'
+
+-----------------------------------------------------------------
+STEP 5: Update Backup Folder ID (Optional)
+-----------------------------------------------------------------
+   If you want automatic backups:
+   
+   a) Create a folder in Google Drive called "QC_Backups"
+   b) Open that folder
+   c) Look at the URL, copy the ID (similar to spreadsheet)
+   d) Find this line in config.gs:
+      BACKUP_FOLDER_ID: '[BACKUP_FOLDER_ID]'
+   e) Replace with your folder ID
+
+-----------------------------------------------------------------
+STEP 6: Save Your Changes
+-----------------------------------------------------------------
+   a) Press Ctrl+S (Windows) or Cmd+S (Mac)
+   b) Wait for save to complete
+
+-----------------------------------------------------------------
+EXAMPLE OF COMPLETED CONFIG:
+-----------------------------------------------------------------
+
+BEFORE:
+   const SPREADSHEET_ID = '[SPREADSHEET_ID]';
+   QC_LEAD: '[QC_LEAD_EMAIL]',
+   DEPARTMENT_HEAD: '[DEPARTMENT_HEAD_EMAIL]',
+
+AFTER:
+   const SPREADSHEET_ID = '1aBcDeFgHiJkLmNoPqRsTuVwXyZ';
+   QC_LEAD: 'qc.lead@mathsdept.edu',
+   DEPARTMENT_HEAD: 'head@mathsdept.edu',
+
+   ✅ SUCCESS: Configuration complete!
+
+================================================================
+5.6 SETTING UP AUTOMATION TRIGGERS
+================================================================
+
+Triggers make scripts run automatically. You need to set up
+6 triggers for full automation.
+
+-----------------------------------------------------------------
+STEP 1: Open the Triggers Page
+-----------------------------------------------------------------
+   a) In Apps Script, look at the left sidebar
+   b) Click on the clock icon ⏰ (says "Triggers" on hover)
+   c) A new page opens showing "Triggers"
+   d) You should see "No triggers set up yet" (if first time)
+
+-----------------------------------------------------------------
+STEP 2: Add Your First Trigger
+-----------------------------------------------------------------
+   a) Click the blue "+ Add Trigger" button (bottom right)
+   b) A popup window appears with settings
+
+-----------------------------------------------------------------
+UNDERSTANDING THE TRIGGER SETTINGS:
+-----------------------------------------------------------------
+
+┌─────────────────────────────────────────────────────────────┐
+│                    Add Trigger                              │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Choose which function to run:    [dropdown]               │
+│  → Select the function name                                 │
+│                                                             │
+│  Choose which deployment:         [Head]                    │
+│  → Leave as "Head"                                          │
+│                                                             │
+│  Select event source:             [dropdown]               │
+│  → Choose "Time-driven"                                     │
+│                                                             │
+│  Select type of time trigger:     [dropdown]               │
+│  → Choose frequency (Hour/Day/Week/Month)                   │
+│                                                             │
+│  [Additional options based on type]                         │
+│                                                             │
+│                              [Cancel]  [Save]               │
+└─────────────────────────────────────────────────────────────┘
+
+-----------------------------------------------------------------
+TRIGGER 1: Weekly Report (sends every Monday)
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "sendWeeklyReport"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "Time-driven"
+   e) Select type of time trigger: Select "Week timer"
+   f) Select day of week: Select "Monday"
+   g) Select time of day: Select "8am to 9am"
+   h) Click "Save"
+   
+   ⚠️ AUTHORIZATION POPUP (First time only):
+      - Click "Review Permissions"
+      - Select your Google account
+      - Click "Advanced" at bottom left
+      - Click "Go to Mathematics_QC_System (unsafe)"
+      - Click "Allow"
+
+-----------------------------------------------------------------
+TRIGGER 2: Monthly Report (sends on 1st of month)
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "sendMonthlyReport"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "Time-driven"
+   e) Select type of time trigger: Select "Month timer"
+   f) Select day of month: Select "1"
+   g) Select time of day: Select "9am to 10am"
+   h) Click "Save"
+
+-----------------------------------------------------------------
+TRIGGER 3: Dashboard Refresh (daily update)
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "refreshDashboard"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "Time-driven"
+   e) Select type of time trigger: Select "Day timer"
+   f) Select time of day: Select "6am to 7am"
+   g) Click "Save"
+
+-----------------------------------------------------------------
+TRIGGER 4: Alert Check (every hour)
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "checkAlerts"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "Time-driven"
+   e) Select type of time trigger: Select "Hour timer"
+   f) Select hour interval: Select "Every hour"
+   g) Click "Save"
+
+-----------------------------------------------------------------
+TRIGGER 5: Daily Backup (automatic backup)
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "createDailyBackup"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "Time-driven"
+   e) Select type of time trigger: Select "Day timer"
+   f) Select time of day: Select "2am to 3am"
+   g) Click "Save"
+
+-----------------------------------------------------------------
+TRIGGER 6: Form Submission Handler
+-----------------------------------------------------------------
+   a) Click "+ Add Trigger"
+   b) Choose which function to run: Select "onFormSubmit"
+   c) Choose which deployment: Leave as "Head"
+   d) Select event source: Select "From spreadsheet"
+   e) Select event type: Select "On form submit"
+   f) Click "Save"
+
+-----------------------------------------------------------------
+VERIFY YOUR TRIGGERS:
+-----------------------------------------------------------------
+   After adding all 6, you should see:
+   
+   ┌────────────────────────────────────────────────────────┐
+   │ Function            │ Event        │ Schedule          │
+   ├─────────────────────┼──────────────┼───────────────────┤
+   │ sendWeeklyReport    │ Time-driven  │ Monday 8-9am      │
+   │ sendMonthlyReport   │ Time-driven  │ 1st of month 9am  │
+   │ refreshDashboard    │ Time-driven  │ Daily 6-7am       │
+   │ checkAlerts         │ Time-driven  │ Every hour        │
+   │ createDailyBackup   │ Time-driven  │ Daily 2-3am       │
+   │ onFormSubmit        │ Spreadsheet  │ On form submit    │
+   └────────────────────────────────────────────────────────┘
+
+   ✅ SUCCESS: All triggers are set up!
+
+================================================================
+5.7 AUTHORIZING THE SCRIPT
+================================================================
+
+Before the script can work, you must give it permission to
+access your sheets and send emails.
+
+-----------------------------------------------------------------
+STEP 1: Run a Test Function
+-----------------------------------------------------------------
+   a) Go back to the Editor (click "Editor" icon in sidebar)
+   b) Click on "config.gs" file
+   c) In the toolbar, find the function dropdown
+      (it might say "verifyConfiguration" or "myFunction")
+   d) Make sure "verifyConfiguration" is selected
+   e) Click the "Run" button (▶ play icon)
+
+-----------------------------------------------------------------
+STEP 2: Authorization Popup Appears
+-----------------------------------------------------------------
+   a) A popup says "Authorization required"
+   b) Click "Review permissions"
+
+-----------------------------------------------------------------
+STEP 3: Choose Your Account
+-----------------------------------------------------------------
+   a) Click on your work Google account
+   b) If you see "This app isn't verified":
+      
+      ⚠️ DON'T WORRY - This is normal for custom scripts!
+      
+      c) Click "Advanced" (small link at bottom left)
+      d) Click "Go to Mathematics_QC_System (unsafe)"
+         (This appears because Google hasn't reviewed YOUR script)
+
+-----------------------------------------------------------------
+STEP 4: Grant Permissions
+-----------------------------------------------------------------
+   a) Review the permissions requested:
+      - See, edit, create spreadsheets
+      - Send email on your behalf
+      - See your email address
+   b) Click "Allow"
+
+-----------------------------------------------------------------
+STEP 5: Verify Authorization Worked
+-----------------------------------------------------------------
+   a) Look at the "Execution log" at the bottom
+   b) If successful, you'll see:
+      - "Execution started"
+      - "Execution completed"
+   c) If there are errors, check:
+      - Is the spreadsheet ID correct?
+      - Are all sheet names exactly right?
+
+   ✅ SUCCESS: Script is authorized!
+
+================================================================
+5.8 DEPLOYING AS A WEB APP
+================================================================
+
+This step creates a URL that the dashboard can use to fetch
+data from your Google Sheets.
+
+-----------------------------------------------------------------
+STEP 1: Open Deploy Menu
+-----------------------------------------------------------------
+   a) In Apps Script, click "Deploy" button (top right)
+   b) Select "New deployment"
+
+-----------------------------------------------------------------
+STEP 2: Configure Deployment
+-----------------------------------------------------------------
+   a) A popup appears
+   b) Click the gear icon ⚙️ next to "Select type"
+   c) Choose "Web app"
+
+-----------------------------------------------------------------
+STEP 3: Fill in Deployment Details
+-----------------------------------------------------------------
+   
+   Description: 
+   → Type: "QC Dashboard API v1.0"
+   
+   Execute as:
+   → Select: "Me (your.email@university.edu)"
+   
+   Who has access:
+   → For university only: Select "Anyone within [Your Organization]"
+   → For public access: Select "Anyone"
+   
+   ⚠️ NOTE: "Anyone within organization" is more secure
+
+-----------------------------------------------------------------
+STEP 4: Deploy
+-----------------------------------------------------------------
+   a) Click "Deploy" button
+   b) Wait for deployment to complete (10-30 seconds)
+   c) A success message appears with:
+      - Deployment ID
+      - Web app URL
+
+-----------------------------------------------------------------
+STEP 5: Copy the Web App URL
+-----------------------------------------------------------------
+   a) Find the "Web app" section
+   b) There's a URL that looks like:
+      https://script.google.com/macros/s/ABCDEFG.../exec
+   c) Click the "Copy" button next to it
+   d) Save this URL somewhere safe!
+      → You'll need it for the dashboard setup (Section 6)
+
+-----------------------------------------------------------------
+STEP 6: Click Done
+-----------------------------------------------------------------
+   a) Click "Done" to close the popup
+
+-----------------------------------------------------------------
+YOUR WEB APP URL FORMAT:
+-----------------------------------------------------------------
+
+https://script.google.com/macros/s/AKfycb.../exec
+                                   ↑↑↑↑↑↑↑
+                              This part is unique to you
+
+SAVE THIS URL! You will need it in Section 6.5
+
+   ✅ SUCCESS: Web App is deployed!
+
+================================================================
+5.9 TESTING THE SCRIPT
+================================================================
+
+Let's verify everything is working before moving on.
+
+-----------------------------------------------------------------
+TEST 1: Configuration Check
+-----------------------------------------------------------------
+   a) In Apps Script, select "verifyConfiguration" function
+   b) Click "Run" (▶)
+   c) Look at the Execution log (bottom of screen)
+   d) You should see:
+      ✅ "Spreadsheet found successfully"
+      ✅ "Sheet Dashboard_Summary found"
+      ✅ "Sheet Lecture_Observations found"
+      ... (for all 8 sheets)
+      ✅ "All configuration verified successfully!"
+
+-----------------------------------------------------------------
+TEST 2: Dashboard Update
+-----------------------------------------------------------------
+   a) Select "refreshDashboard" function
+   b) Click "Run" (▶)
+   c) Check the Execution log for success
+   d) Open your Google Sheet and check Dashboard_Summary
+      → You should see data in the table
+
+-----------------------------------------------------------------
+TEST 3: Web App API
+-----------------------------------------------------------------
+   a) Open a new browser tab
+   b) Paste your Web App URL
+   c) Add "?action=getData" to the end:
+      https://script.google.com/.../exec?action=getData
+   d) Press Enter
+   e) You should see data appear (looks like code/text)
+   f) If you see data, the API is working!
+
+-----------------------------------------------------------------
+TROUBLESHOOTING:
+-----------------------------------------------------------------
+
+❌ "Spreadsheet not found"
+   → Check SPREADSHEET_ID in config.gs
+   → Make sure you copied the correct ID from the URL
+
+❌ "Sheet not found"
+   → Check sheet names match EXACTLY
+   → Names are case-sensitive!
+
+❌ "Authorization required" keeps appearing
+   → Run authorization again (Section 5.7)
+   → Make sure you clicked "Allow"
+
+❌ Web App shows "Error" 
+   → Check script for red error lines
+   → Try redeploying (Deploy > Manage deployments > Edit)
+
+   ✅ SUCCESS: All tests passed!
+
+
+================================================================
+================================================================
+SECTION 6: DASHBOARD SETUP (GitHub Pages) - DETAILED
+================================================================
+================================================================
+
+This section explains how to put your dashboard online using
+GitHub Pages (free hosting).
+
+================================================================
+6.1 CREATING A GITHUB ACCOUNT
+================================================================
+
+If you already have a GitHub account, skip to Section 6.2.
+
+-----------------------------------------------------------------
+STEP 1: Go to GitHub
+-----------------------------------------------------------------
+   a) Open your web browser
+   b) Go to: https://github.com
+   c) Click "Sign up" button (top right)
+
+-----------------------------------------------------------------
+STEP 2: Enter Your Details
+-----------------------------------------------------------------
+   a) Enter your email address (use work email)
+   b) Click "Continue"
+   c) Create a password (at least 15 characters)
+      OR 8 characters with a number and lowercase letter
+   d) Click "Continue"
+   e) Choose a username
+      Example: math-dept-qc or johndoe-math
+   f) Click "Continue"
+
+-----------------------------------------------------------------
+STEP 3: Verify Your Account
+-----------------------------------------------------------------
+   a) Complete the puzzle/verification
+   b) Click "Create account"
+   c) Check your email for a verification code
+   d) Enter the code on GitHub
+
+-----------------------------------------------------------------
+STEP 4: Skip Personalization (Optional)
+-----------------------------------------------------------------
+   a) You may see setup questions
+   b) You can click "Skip personalization" at the bottom
+   
+   ✅ SUCCESS: GitHub account created!
+
+================================================================
+6.2 CREATING A REPOSITORY
+================================================================
+
+A repository is like a folder that stores your dashboard files.
+
+-----------------------------------------------------------------
+STEP 1: Create New Repository
+-----------------------------------------------------------------
+   a) On GitHub, click the "+" icon (top right menu bar)
+   b) Select "New repository"
+
+-----------------------------------------------------------------
+STEP 2: Fill in Repository Details
+-----------------------------------------------------------------
+   
+   Repository name:
+   → Type: math-qc-dashboard
+   
+   Description (optional):
+   → Type: Mathematics Department QC Dashboard
+   
+   Public or Private:
+   → Choose "Public" (required for free GitHub Pages)
+   → OR "Private" (requires GitHub Pro for Pages)
+   
+   Initialize this repository with:
+   → ☑️ CHECK "Add a README file"
+
+-----------------------------------------------------------------
+STEP 3: Create Repository
+-----------------------------------------------------------------
+   a) Click the green "Create repository" button
+   b) Wait for the page to load
+   c) You now see your repository page!
+
+   ✅ SUCCESS: Repository created!
+
+================================================================
+6.3 UPLOADING DASHBOARD FILES
+================================================================
+
+Now upload the dashboard files to your repository.
+
+-----------------------------------------------------------------
+STEP 1: Locate Your Dashboard Files
+-----------------------------------------------------------------
+   On your computer, find these 3 files:
+   → public/dashboard/index.html
+   → public/dashboard/style.css
+   → public/dashboard/dashboard.js
+
+-----------------------------------------------------------------
+STEP 2: Open the Upload Page
+-----------------------------------------------------------------
+   a) On your GitHub repository page
+   b) Click "Add file" button (above the file list)
+   c) Select "Upload files"
+
+-----------------------------------------------------------------
+STEP 3: Upload the Files
+-----------------------------------------------------------------
+   a) You can either:
+      
+      OPTION A: Drag and drop
+      → Open your file explorer
+      → Navigate to public/dashboard/
+      → Select all 3 files
+      → Drag them into the upload area on GitHub
+      
+      OPTION B: Choose files
+      → Click "choose your files"
+      → Navigate to public/dashboard/
+      → Select all 3 files (Ctrl+click to select multiple)
+      → Click "Open"
+
+-----------------------------------------------------------------
+STEP 4: Commit the Files
+-----------------------------------------------------------------
+   a) Scroll down to "Commit changes"
+   b) In the first text box, type:
+      "Add dashboard files"
+   c) Leave the second box empty
+   d) Make sure "Commit directly to main branch" is selected
+   e) Click "Commit changes"
+   
+   ⏳ Wait for upload to complete...
+
+-----------------------------------------------------------------
+STEP 5: Verify Files are Uploaded
+-----------------------------------------------------------------
+   a) You're returned to the repository page
+   b) You should see 4 files:
+      - README.md
+      - index.html
+      - style.css
+      - dashboard.js
+
+   ✅ SUCCESS: Files uploaded!
+
+================================================================
+6.4 ENABLING GITHUB PAGES
+================================================================
+
+This step makes your dashboard publicly accessible.
+
+-----------------------------------------------------------------
+STEP 1: Go to Repository Settings
+-----------------------------------------------------------------
+   a) On your repository page
+   b) Click "Settings" tab (in the top menu)
+      ⚠️ Make sure it's the repository Settings, not your account settings
+
+-----------------------------------------------------------------
+STEP 2: Find the Pages Section
+-----------------------------------------------------------------
+   a) In the left sidebar, scroll down
+   b) Click "Pages" (under "Code and automation")
+
+-----------------------------------------------------------------
+STEP 3: Configure GitHub Pages
+-----------------------------------------------------------------
+   
+   Build and deployment section:
+   
+   Source:
+   → Should say "Deploy from a branch"
+   
+   Branch:
+   → Click the dropdown (might say "None")
+   → Select "main"
+   → Second dropdown should be "/ (root)"
+   
+-----------------------------------------------------------------
+STEP 4: Save Settings
+-----------------------------------------------------------------
+   a) Click "Save" button
+
+-----------------------------------------------------------------
+STEP 5: Wait for Deployment
+-----------------------------------------------------------------
+   a) GitHub will now build your site
+   b) This takes 2-5 minutes
+   c) Refresh the page after a few minutes
+   d) You'll see a green box at the top:
+      "Your site is live at https://username.github.io/math-qc-dashboard/"
+
+-----------------------------------------------------------------
+STEP 6: Note Your Dashboard URL
+-----------------------------------------------------------------
+   Your dashboard URL format:
+   https://[your-username].github.io/math-qc-dashboard/
+   
+   Example:
+   https://johndoe.github.io/math-qc-dashboard/
+
+   SAVE THIS URL! This is your live dashboard.
+
+   ✅ SUCCESS: GitHub Pages is enabled!
+
+================================================================
+6.5 CONNECTING DASHBOARD TO APPS SCRIPT
+================================================================
+
+Now we need to tell the dashboard where to get data.
+
+-----------------------------------------------------------------
+STEP 1: Edit dashboard.js on GitHub
+-----------------------------------------------------------------
+   a) Go to your repository page
+   b) Click on "dashboard.js" file
+   c) Click the pencil icon ✏️ (Edit this file)
+
+-----------------------------------------------------------------
+STEP 2: Find the API URL Line
+-----------------------------------------------------------------
+   a) Look for this line (near the top, around line 10):
+   
+      API_URL: '[YOUR_APPS_SCRIPT_URL]',
+   
+   OR it might look like:
+   
+      const API_URL = '[YOUR_APPS_SCRIPT_URL]';
+
+-----------------------------------------------------------------
+STEP 3: Replace with Your Web App URL
+-----------------------------------------------------------------
+   a) Remember the URL you saved in Section 5.8?
+   b) Replace [YOUR_APPS_SCRIPT_URL] with your actual URL
+   
+   BEFORE:
+      API_URL: '[YOUR_APPS_SCRIPT_URL]',
+   
+   AFTER:
+      API_URL: 'https://script.google.com/macros/s/AKfycb.../exec',
+   
+   ⚠️ IMPORTANT: Keep the quotes around the URL!
+
+-----------------------------------------------------------------
+STEP 4: Enable Live Data (Optional)
+-----------------------------------------------------------------
+   If you also see this line:
+      USE_DEMO_DATA: true,
+   
+   Change it to:
+      USE_DEMO_DATA: false,
+   
+   This makes the dashboard use real data instead of demo data.
+
+-----------------------------------------------------------------
+STEP 5: Save Your Changes
+-----------------------------------------------------------------
+   a) Scroll down to "Commit changes"
+   b) Type a message: "Connect to Apps Script API"
+   c) Click "Commit changes"
+
+-----------------------------------------------------------------
+STEP 6: Wait for Redeployment
+-----------------------------------------------------------------
+   a) GitHub Pages will automatically update
+   b) Wait 2-3 minutes
+   c) Open your dashboard URL
+   d) You should see your real data!
+
+   ✅ SUCCESS: Dashboard is connected!
+
+================================================================
+6.6 TESTING YOUR LIVE DASHBOARD
+================================================================
+
+Let's verify everything works together.
+
+-----------------------------------------------------------------
+TEST 1: Open Dashboard
+-----------------------------------------------------------------
+   a) Go to your dashboard URL:
+      https://[username].github.io/math-qc-dashboard/
+   b) The page should load without errors
+   c) You should see KPI cards and charts
+
+-----------------------------------------------------------------
+TEST 2: Check Data Loading
+-----------------------------------------------------------------
+   a) Look at the KPI cards
+   b) They should show numbers (not "Loading...")
+   c) Charts should display data points
+
+-----------------------------------------------------------------
+TEST 3: Test Refresh
+-----------------------------------------------------------------
+   a) Click the "Refresh" button (top right)
+   b) The loading spinner should appear briefly
+   c) Data should update
+   d) "Last updated" time should change
+
+-----------------------------------------------------------------
+TEST 4: Submit Test Data
+-----------------------------------------------------------------
+   a) Open one of your Google Forms
+   b) Submit a test entry
+   c) Wait 2-3 minutes
+   d) Refresh the dashboard
+   e) The new data should appear
+
+-----------------------------------------------------------------
+TROUBLESHOOTING:
+-----------------------------------------------------------------
+
+❌ Dashboard shows "Error loading data"
+   → Check API URL is correct in dashboard.js
+   → Make sure Apps Script is deployed
+   → Check browser console (F12) for error details
+
+❌ Dashboard is blank
+   → Check browser console for JavaScript errors
+   → Make sure all 3 files were uploaded
+   → Try hard refresh: Ctrl+Shift+R
+
+❌ Still showing demo data
+   → Change USE_DEMO_DATA to false
+   → Make sure changes were committed
+   → Wait for GitHub Pages to redeploy
+
+   ✅ SUCCESS: Live dashboard is working!
+
+
+================================================================
+================================================================
+SECTION 7: TESTING THE COMPLETE SYSTEM
+================================================================
+================================================================
+
+Now let's test everything works together.
+
+================================================================
+7.1 COMPLETE SYSTEM TEST CHECKLIST
+================================================================
+
+□ Test 1: Form Submission
+□ Test 2: Data Appears in Sheet
+□ Test 3: Dashboard Shows Data
+□ Test 4: Email Report Works
+□ Test 5: Alerts Trigger
+
+================================================================
+7.2 TEST 1: FORM SUBMISSION
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Open a Google Form
+-----------------------------------------------------------------
+   a) Open your Lecture Observation Form link
+   b) The form should load in your browser
+
+-----------------------------------------------------------------
+STEP 2: Fill in Test Data
+-----------------------------------------------------------------
+   Enter this sample data:
+   
+   - Date of Observation: [Today's date]
+   - Course Code: M1
+   - Instructor Name: Dr. Test
+   - Session Type: Lecture
+   - Topic Covered: "Test Lecture for QC System"
+   - Number of Students Present: 30
+   - All scores (Correctness through Pace): 4
+   - Was session rehearsed: Yes
+   - Was readiness checklist complete: Yes
+   - Number of content errors found: 0
+   - Tangents: No
+   - Strengths: "Good explanation"
+   - Areas for improvement: "None for this test"
+   - Priority Level: Low
+   - Recommended action: "Continue as is"
+   - Action Owner: Dr. Test
+   - Review Date: [Next week's date]
+
+-----------------------------------------------------------------
+STEP 3: Submit Form
+-----------------------------------------------------------------
+   a) Click "Submit"
+   b) You should see "Your response has been recorded"
+
+   ✅ PASS: Form submitted successfully
+
+================================================================
+7.3 TEST 2: DATA IN SHEET
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Open Google Sheet
+-----------------------------------------------------------------
+   a) Go to your Mathematics_QC_Master spreadsheet
+   b) Click on "Lecture_Observations" tab
+
+-----------------------------------------------------------------
+STEP 2: Verify Data
+-----------------------------------------------------------------
+   a) Look for your test entry
+   b) It should appear in the last row
+   c) Check that all columns have data
+
+   ✅ PASS: Data appears in sheet
+
+================================================================
+7.4 TEST 3: DASHBOARD UPDATE
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Open Dashboard
+-----------------------------------------------------------------
+   a) Go to your dashboard URL
+   b) Click "Refresh" button
+
+-----------------------------------------------------------------
+STEP 2: Verify Changes
+-----------------------------------------------------------------
+   a) Check "Lectures Observed" KPI - should increase by 1
+   b) Check "Recent Activity" - should show new observation
+
+   ✅ PASS: Dashboard shows new data
+
+================================================================
+7.5 TEST 4: EMAIL REPORT
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Manually Run Report
+-----------------------------------------------------------------
+   a) Open Google Apps Script
+   b) Select "sendWeeklyReport" function
+   c) Click "Run"
+
+-----------------------------------------------------------------
+STEP 2: Check Email
+-----------------------------------------------------------------
+   a) Open your email inbox
+   b) Look for email from "Mathematics QC System"
+   c) If not in inbox, check Spam folder
+   d) Open the email and verify content
+
+   ✅ PASS: Email report received
+
+================================================================
+7.6 TEST 5: ALERT CHECK
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Create a Test Alert
+-----------------------------------------------------------------
+   a) Submit another form with LOW scores (all 2's)
+   b) This should trigger an alert
+
+-----------------------------------------------------------------
+STEP 2: Run Alert Check
+-----------------------------------------------------------------
+   a) In Apps Script, run "checkAlerts" function
+   b) Check your email for alert notification
+
+-----------------------------------------------------------------
+STEP 3: Check Dashboard Alerts
+-----------------------------------------------------------------
+   a) Refresh dashboard
+   b) Look for alert banner at top
+   c) Alert should mention the quality issue
+
+   ✅ PASS: Alerts working
+
+
+================================================================
+================================================================
+SECTION 8: DAILY OPERATIONS GUIDE
+================================================================
+================================================================
+
+================================================================
+8.1 DAILY TASKS FOR QC TEAM
+================================================================
+
+-----------------------------------------------------------------
+MORNING ROUTINE (9:00 AM):
+-----------------------------------------------------------------
+□ Open dashboard in browser
+□ Check for red/yellow alert banners
+□ Review any new critical issues
+□ Check Action Items table for overdue items
+□ Note items needing attention today
+
+-----------------------------------------------------------------
+DURING THE DAY:
+-----------------------------------------------------------------
+□ After each lecture/lab observation:
+   → Fill out Lecture Observation Form immediately
+   → Do NOT wait until end of day
+   
+□ When reviewing an assessment:
+   → Fill out Assessment QC Form
+   → If errors found, also create Action Item
+   
+□ When issues arise:
+   → Log in Action Tracker Form
+   → Set appropriate severity level
+
+-----------------------------------------------------------------
+END OF DAY (5:00 PM):
+-----------------------------------------------------------------
+□ Verify all observations were submitted
+□ Check Action Items - update any resolved items
+□ Review dashboard one final time
+□ Note any items for tomorrow
+
+================================================================
+8.2 WEEKLY TASKS
+================================================================
+
+-----------------------------------------------------------------
+MONDAY:
+-----------------------------------------------------------------
+□ Review weekly email report (auto-sent 8 AM)
+□ Team meeting to discuss report findings
+□ Set priorities for the week
+□ Schedule observation assignments
+□ Review any weekend form submissions
+
+-----------------------------------------------------------------
+WEDNESDAY (Mid-week check):
+-----------------------------------------------------------------
+□ Check progress on action items
+□ Follow up on overdue items
+□ Mid-week dashboard review
+□ Adjust priorities if needed
+
+-----------------------------------------------------------------
+FRIDAY:
+-----------------------------------------------------------------
+□ Ensure all week's observations submitted
+□ Close out resolved action items
+□ Update action item statuses
+□ Review weekly metrics
+□ Prepare notes for Monday meeting
+
+================================================================
+8.3 MONTHLY TASKS
+================================================================
+
+-----------------------------------------------------------------
+FIRST WEEK:
+-----------------------------------------------------------------
+□ Review monthly report (auto-sent 1st)
+□ Generate instructor performance summary
+□ Review all student feedback
+□ Analyze monthly trends
+□ Prepare department head briefing
+
+-----------------------------------------------------------------
+THIRD WEEK:
+-----------------------------------------------------------------
+□ QC calibration meeting
+□ Review QC process effectiveness
+□ Adjust thresholds if needed
+□ Conduct system health check
+□ Training for new team members (if any)
+
+-----------------------------------------------------------------
+END OF MONTH:
+-----------------------------------------------------------------
+□ Verify all monthly data is complete
+□ Archive old resolved action items
+□ Update instructor records
+□ Create monthly summary document
+□ Document any lessons learned
+
+
+================================================================
+================================================================
+SECTION 9: TROUBLESHOOTING COMMON ISSUES (DETAILED)
+================================================================
+================================================================
+
+================================================================
+9.1 FORMS NOT SUBMITTING
+================================================================
+
+SYMPTOM: 
+Clicking "Submit" does nothing, or you see an error.
+
+-----------------------------------------------------------------
+SOLUTION A: Check Required Fields
+-----------------------------------------------------------------
+1. Scroll through the entire form
+2. Look for questions marked with red asterisk *
+3. Make sure ALL required questions are answered
+4. Look for red text saying "This is a required question"
+
+-----------------------------------------------------------------
+SOLUTION B: Check Internet Connection
+-----------------------------------------------------------------
+1. Open a new tab
+2. Go to google.com
+3. If it loads, internet is working
+4. If not, check your WiFi/network connection
+
+-----------------------------------------------------------------
+SOLUTION C: Refresh and Try Again
+-----------------------------------------------------------------
+1. Copy any long text answers (so you don't lose them)
+2. Press F5 or click Refresh
+3. Fill out the form again
+4. Try submitting
+
+-----------------------------------------------------------------
+SOLUTION D: Try Different Browser
+-----------------------------------------------------------------
+1. Open Google Chrome (recommended)
+2. Go to the form link
+3. Fill out and submit
+
+-----------------------------------------------------------------
+SOLUTION E: Clear Browser Cache
+-----------------------------------------------------------------
+1. Press Ctrl+Shift+Delete
+2. Select "Cached images and files"
+3. Click "Clear data"
+4. Try the form again
+
+================================================================
+9.2 DATA NOT APPEARING IN SHEETS
+================================================================
+
+SYMPTOM:
+Form submitted successfully but data not in spreadsheet.
+
+-----------------------------------------------------------------
+SOLUTION A: Check Form-Sheet Connection
+-----------------------------------------------------------------
+1. Open the Google Form in edit mode
+2. Click "Responses" tab
+3. Click the green Sheets icon
+4. Verify it shows your correct spreadsheet
+5. If wrong, disconnect and reconnect
+
+-----------------------------------------------------------------
+SOLUTION B: Check Correct Sheet Tab
+-----------------------------------------------------------------
+1. Open your spreadsheet
+2. Make sure you're looking at the right sheet tab
+3. Form data goes to a sheet named after the form
+4. Example: "Lecture Observation (Responses)"
+
+-----------------------------------------------------------------
+SOLUTION C: Wait and Refresh
+-----------------------------------------------------------------
+1. Sometimes there's a delay (1-2 minutes)
+2. Close the spreadsheet
+3. Wait 2 minutes
+4. Open again and check
+
+-----------------------------------------------------------------
+SOLUTION D: Check Form is Accepting Responses
+-----------------------------------------------------------------
+1. Open form in edit mode
+2. Click "Responses" tab
+3. Make sure toggle "Accepting responses" is ON
+
+================================================================
+9.3 DASHBOARD NOT LOADING
+================================================================
+
+SYMPTOM:
+Dashboard is blank, shows error, or won't load.
+
+-----------------------------------------------------------------
+SOLUTION A: Check Internet Connection
+-----------------------------------------------------------------
+1. Try opening google.com in new tab
+2. If that works, continue to Solution B
+
+-----------------------------------------------------------------
+SOLUTION B: Hard Refresh
+-----------------------------------------------------------------
+1. Press Ctrl+Shift+R (Windows)
+   OR Cmd+Shift+R (Mac)
+2. This clears cached version
+3. Wait for page to load
+
+-----------------------------------------------------------------
+SOLUTION C: Check JavaScript Console
+-----------------------------------------------------------------
+1. Press F12 to open Developer Tools
+2. Click "Console" tab
+3. Look for red error messages
+4. Common errors:
+   - "API_URL is not defined" → URL not configured
+   - "CORS error" → Need to redeploy Apps Script
+   - "404" → File not found on GitHub
+
+-----------------------------------------------------------------
+SOLUTION D: Check API URL Configuration
+-----------------------------------------------------------------
+1. Go to GitHub repository
+2. Open dashboard.js
+3. Find the API_URL line
+4. Make sure it has your Apps Script URL
+5. Make sure USE_DEMO_DATA is false (for live data)
+
+-----------------------------------------------------------------
+SOLUTION E: Test API Directly
+-----------------------------------------------------------------
+1. Open new browser tab
+2. Paste your Apps Script URL
+3. Add ?action=getData to end
+4. Press Enter
+5. Should see data (not an error)
+
+-----------------------------------------------------------------
+SOLUTION F: Redeploy Apps Script
+-----------------------------------------------------------------
+1. Open Apps Script
+2. Click Deploy > Manage deployments
+3. Click the pencil icon to edit
+4. Change version to "New version"
+5. Click "Deploy"
+6. Copy new URL and update dashboard.js
+
+================================================================
+9.4 EMAIL REPORTS NOT SENDING
+================================================================
+
+SYMPTOM:
+No weekly/monthly email reports received.
+
+-----------------------------------------------------------------
+SOLUTION A: Check Spam Folder
+-----------------------------------------------------------------
+1. Open your email
+2. Check Spam/Junk folder
+3. If found, mark as "Not Spam"
+4. Add sender to contacts
+
+-----------------------------------------------------------------
+SOLUTION B: Check Email Configuration
+-----------------------------------------------------------------
+1. Open Apps Script
+2. Open config.gs
+3. Find EMAIL_CONFIG section
+4. Verify your email address is correct
+5. Check NOTIFICATIONS_ENABLED is true
+
+-----------------------------------------------------------------
+SOLUTION C: Check Triggers
+-----------------------------------------------------------------
+1. In Apps Script, click clock icon (Triggers)
+2. Find sendWeeklyReport trigger
+3. Verify it exists and is enabled
+4. Check "Last run" column for errors
+
+-----------------------------------------------------------------
+SOLUTION D: Run Manually
+-----------------------------------------------------------------
+1. In Apps Script, select sendWeeklyReport
+2. Click Run
+3. Check Execution log for errors
+4. Check your email
+
+-----------------------------------------------------------------
+SOLUTION E: Check Google Quotas
+-----------------------------------------------------------------
+1. Google limits emails per day
+2. Free accounts: 100 emails/day
+3. If quota exceeded, wait 24 hours
+4. Consider Google Workspace for higher limits
+
+================================================================
+9.5 SCRIPT ERRORS
+================================================================
+
+SYMPTOM:
+Red errors in Apps Script, or functions not working.
+
+-----------------------------------------------------------------
+SOLUTION A: Check Execution Log
+-----------------------------------------------------------------
+1. In Apps Script, click "Executions" (left sidebar)
+2. Find the failed execution
+3. Click to see error details
+4. Note the error message
+
+-----------------------------------------------------------------
+SOLUTION B: Common Error Fixes
+-----------------------------------------------------------------
+
+ERROR: "SpreadsheetApp.openById: not found"
+FIX: Check SPREADSHEET_ID in config.gs is correct
+
+ERROR: "Sheet not found"
+FIX: Check sheet names match exactly (case-sensitive)
+
+ERROR: "Cannot read property of undefined"
+FIX: Usually missing data - check sheet has data
+
+ERROR: "Authorization required"
+FIX: Run the function manually and authorize again
+
+-----------------------------------------------------------------
+SOLUTION C: Re-authorize
+-----------------------------------------------------------------
+1. Run any function (like verifyConfiguration)
+2. Complete authorization flow again
+3. Click "Allow" for all permissions
+
+-----------------------------------------------------------------
+SOLUTION D: Check Code Syntax
+-----------------------------------------------------------------
+1. Look for red underlines in code
+2. Hover over them to see error
+3. Common issues:
+   - Missing quotes around text
+   - Missing semicolons
+   - Mismatched brackets
+
+================================================================
+9.6 GITHUB PAGES NOT UPDATING
+================================================================
+
+SYMPTOM:
+Changes made but not showing on live site.
+
+-----------------------------------------------------------------
+SOLUTION A: Wait for Deployment
+-----------------------------------------------------------------
+1. GitHub Pages can take 5-10 minutes
+2. Go to Settings > Pages
+3. Look for "last deployment" time
+4. Wait if recent commit not deployed
+
+-----------------------------------------------------------------
+SOLUTION B: Check Deployment Status
+-----------------------------------------------------------------
+1. Click "Actions" tab in repository
+2. Look for recent workflow run
+3. Green check = success
+4. Red X = failed (click for details)
+
+-----------------------------------------------------------------
+SOLUTION C: Hard Refresh Browser
+-----------------------------------------------------------------
+1. Go to dashboard URL
+2. Press Ctrl+Shift+R
+3. This bypasses browser cache
+
+-----------------------------------------------------------------
+SOLUTION D: Check Branch Settings
+-----------------------------------------------------------------
+1. Go to Settings > Pages
+2. Make sure "main" branch selected
+3. Make sure "/ (root)" folder selected
+4. Click Save if you made changes
+
+
+================================================================
+================================================================
+SECTION 10: BACKUP AND MAINTENANCE
+================================================================
+================================================================
+
+================================================================
+10.1 AUTOMATIC BACKUPS
+================================================================
+
+The system creates automatic daily backups if configured.
+
+HOW IT WORKS:
+- Trigger runs daily at 2 AM
+- Creates copy of entire spreadsheet
+- Saves to your Backup folder
+- Old backups deleted after 30 days
+
+TO VERIFY BACKUPS ARE WORKING:
+1. Open Google Drive
+2. Go to your QC_Backups folder
+3. You should see files named:
+   QC_Backup_2026-01-15
+   QC_Backup_2026-01-14
+   etc.
+
+================================================================
+10.2 MANUAL BACKUP (Weekly Recommended)
+================================================================
+
+-----------------------------------------------------------------
+STEP 1: Open Your Spreadsheet
+-----------------------------------------------------------------
+1. Go to Google Drive
+2. Open Mathematics_QC_Master
+
+-----------------------------------------------------------------
+STEP 2: Download a Copy
+-----------------------------------------------------------------
+1. Click File menu
+2. Select Download
+3. Choose "Microsoft Excel (.xlsx)"
+4. File downloads to your computer
+
+-----------------------------------------------------------------
+STEP 3: Save to Secure Location
+-----------------------------------------------------------------
+1. Create folder: "QC_Backups_Manual"
+2. Move downloaded file there
+3. Rename with date: "QC_Backup_2026-01-15.xlsx"
+
+================================================================
+10.3 MONTHLY SYSTEM HEALTH CHECK
+================================================================
+
+Run this checklist monthly:
+
+-----------------------------------------------------------------
+□ FORMS CHECK:
+-----------------------------------------------------------------
+  □ Each form loads correctly
+  □ Each form is accepting responses
+  □ Each form is linked to correct sheet
+  □ Test submission works
+
+-----------------------------------------------------------------
+□ SHEETS CHECK:
+-----------------------------------------------------------------
+  □ All 8 sheets exist
+  □ Headers are intact
+  □ Data is present (not corrupted)
+  □ Formulas working (if any)
+
+-----------------------------------------------------------------
+□ SCRIPTS CHECK:
+-----------------------------------------------------------------
+  □ Run verifyConfiguration - all green
+  □ Check Triggers - all 6 active
+  □ Check Executions - no failures
+  □ Test email sending
+
+-----------------------------------------------------------------
+□ DASHBOARD CHECK:
+-----------------------------------------------------------------
+  □ Dashboard loads
+  □ Data appears correctly
+  □ Charts render
+  □ Refresh works
+
+-----------------------------------------------------------------
+□ BACKUP CHECK:
+-----------------------------------------------------------------
+  □ Automatic backups running
+  □ Backup folder has recent files
+  □ Create manual backup
+
+
+================================================================
+================================================================
+SECTION 11: USER ROLES AND PERMISSIONS
+================================================================
+================================================================
+
+================================================================
+11.1 ROLE DEFINITIONS
+================================================================
+
+-----------------------------------------------------------------
+DEPARTMENT HEAD
+-----------------------------------------------------------------
+Access: Full access to everything
+Can do:
+  ✓ View all dashboards and data
+  ✓ Access all reports
+  ✓ View all instructor metrics
+  ✓ Approve major changes
+Cannot do:
+  ✗ Usually doesn't edit raw data
+
+-----------------------------------------------------------------
+QC LEAD
+-----------------------------------------------------------------
+Access: Full edit access
+Can do:
+  ✓ Edit all sheets
+  ✓ Manage triggers
+  ✓ Configure settings
+  ✓ Add/remove users
+  ✓ Generate reports
+  ✓ Resolve escalations
+Cannot do:
+  ✗ Cannot change department policies
+
+-----------------------------------------------------------------
+QC TEAM MEMBERS
+-----------------------------------------------------------------
+Access: Edit specific sheets
+Can do:
+  ✓ Submit all forms
+  ✓ View dashboard
+  ✓ Edit observations they created
+  ✓ Update action items
+Cannot do:
+  ✗ Cannot modify settings
+  ✗ Cannot manage triggers
+  ✗ Cannot see other team's data (optional)
+
+-----------------------------------------------------------------
+INSTRUCTORS
+-----------------------------------------------------------------
+Access: View only (limited)
+Can do:
+  ✓ View their own performance
+  ✓ View dashboard (general metrics)
+  ✓ Respond to action items
+Cannot do:
+  ✗ Cannot see other instructors' data
+  ✗ Cannot edit any data
+  ✗ Cannot access settings
+
+-----------------------------------------------------------------
+STUDENTS
+-----------------------------------------------------------------
+Access: Form submission only
+Can do:
+  ✓ Submit feedback forms
+Cannot do:
+  ✗ Cannot see any data
+  ✗ Cannot access dashboard
+  ✗ Cannot access spreadsheets
+
+================================================================
+11.2 HOW TO SET PERMISSIONS
+================================================================
+
+-----------------------------------------------------------------
+SETTING SPREADSHEET PERMISSIONS:
+-----------------------------------------------------------------
+
+STEP 1: Open the spreadsheet
+
+STEP 2: Click "Share" button (top right)
+
+STEP 3: Add users with specific access:
+
+For EDITOR access:
+  1. Type email address
+  2. Click dropdown next to their name
+  3. Select "Editor"
+  4. Click "Send"
+
+For VIEWER access:
+  1. Type email address
+  2. Click dropdown next to their name
+  3. Select "Viewer"
+  4. Click "Send"
+
+For COMMENTER access:
+  1. Type email address
+  2. Click dropdown next to their name
+  3. Select "Commenter"
+  4. Click "Send"
+
+-----------------------------------------------------------------
+RECOMMENDED PERMISSION SETTINGS:
+-----------------------------------------------------------------
+
+| Role             | Spreadsheet | Dashboard | Forms |
+|------------------|-------------|-----------|-------|
+| Department Head  | Viewer      | View      | N/A   |
+| QC Lead          | Editor      | View      | Submit|
+| QC Team          | Editor      | View      | Submit|
+| Instructors      | Viewer      | View      | N/A   |
+| Students         | None        | None      | Submit|
+
+
+================================================================
+================================================================
+SECTION 12: QUICK REFERENCE CARDS
+================================================================
+================================================================
+
+Print these cards and keep them handy!
+
+================================================================
+12.1 FORM LINKS CARD
+================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│              QC SYSTEM - FORM LINKS                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  📋 Lecture Observation Form:                               │
+│     https://forms.gle/_________________________             │
+│                                                             │
+│  📝 Assessment QC Form:                                     │
+│     https://forms.gle/_________________________             │
+│                                                             │
+│  🔬 Research QC Form:                                       │
+│     https://forms.gle/_________________________             │
+│                                                             │
+│  💬 Student Feedback Form:                                  │
+│     https://forms.gle/_________________________             │
+│                                                             │
+│  ⚡ Action Tracker Form:                                    │
+│     https://forms.gle/_________________________             │
+│                                                             │
+│  📊 Dashboard:                                              │
+│     https://___________.github.io/math-qc-dashboard/        │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================
+12.2 IMPORTANT CONTACTS CARD
+================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│              QC SYSTEM - CONTACTS                           │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  👤 QC Lead:                                                │
+│     Name: _________________________________                 │
+│     Email: ________________________________                 │
+│     Phone: ________________________________                 │
+│                                                             │
+│  🖥️ IT Support:                                             │
+│     Email: ________________________________                 │
+│     Phone: ________________________________                 │
+│                                                             │
+│  👔 Department Head:                                        │
+│     Name: _________________________________                 │
+│     Email: ________________________________                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================
+12.3 DAILY CHECKLIST CARD
+================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│              DAILY QC CHECKLIST                             │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  MORNING (9 AM):                                            │
+│  □ Check dashboard for alerts                               │
+│  □ Review pending action items                              │
+│  □ Note today's observations to complete                    │
+│                                                             │
+│  DURING DAY:                                                │
+│  □ Submit observation form after each session               │
+│  □ Log any issues in Action Tracker                         │
+│  □ Update action item status as resolved                    │
+│                                                             │
+│  END OF DAY (5 PM):                                         │
+│  □ All observations submitted                               │
+│  □ Action items updated                                     │
+│  □ Final dashboard check                                    │
+│                                                             │
+│  Date: ___________  Completed by: _______________           │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+
+================================================================
+================================================================
+SECTION 13: FREQUENTLY ASKED QUESTIONS
+================================================================
+================================================================
+
+-----------------------------------------------------------------
+Q: How often should I fill observation forms?
+-----------------------------------------------------------------
+A: After EVERY lecture or lab session you observe. 
+   Don't wait until end of day - submit immediately
+   while details are fresh.
+
+-----------------------------------------------------------------
+Q: Can I edit a submitted form response?
+-----------------------------------------------------------------
+A: No, Google Forms doesn't allow editing after submission.
+   If you made a mistake:
+   1. Contact QC Lead
+   2. They can edit the data directly in the sheet
+   3. OR submit a new form with "CORRECTION:" in comments
+
+-----------------------------------------------------------------
+Q: Who can see the dashboard?
+-----------------------------------------------------------------
+A: Anyone with the link can view the dashboard.
+   However, the data shown is only from your department.
+   Individual instructor data requires login.
+
+-----------------------------------------------------------------
+Q: How long is data stored?
+-----------------------------------------------------------------
+A: Active data: Indefinitely in Google Sheets
+   Resolved actions: Archived after 90 days
+   Backups: Kept for 30 days
+
+-----------------------------------------------------------------
+Q: What if I make a mistake in the data?
+-----------------------------------------------------------------
+A: Contact QC Lead with:
+   - Date of the entry
+   - Which form/sheet
+   - What needs to be corrected
+   They will fix it directly in the sheet.
+
+-----------------------------------------------------------------
+Q: Can I access the system from my phone?
+-----------------------------------------------------------------
+A: Yes!
+   - Google Forms: Works on mobile browsers
+   - Dashboard: Works on mobile (may be smaller)
+   - Sheets: Use Google Sheets app
+
+-----------------------------------------------------------------
+Q: How do I get technical help?
+-----------------------------------------------------------------
+A: 1. First, check Section 9 (Troubleshooting)
+   2. If not solved, contact IT Support
+   3. Provide:
+      - What you were trying to do
+      - What error you saw
+      - Screenshots if possible
+
+-----------------------------------------------------------------
+Q: What happens if internet goes down?
+-----------------------------------------------------------------
+A: - Forms cannot be submitted offline
+   - Dashboard won't load without internet
+   - Keep paper forms as backup
+   - Enter data when connection restored
+
+-----------------------------------------------------------------
+Q: Can I export data to Excel?
+-----------------------------------------------------------------
+A: Yes!
+   1. Open Google Sheet
+   2. File > Download > Microsoft Excel (.xlsx)
+   3. Opens in Excel on your computer
+
+-----------------------------------------------------------------
+Q: Why isn't my data showing on dashboard?
+-----------------------------------------------------------------
+A: Possible reasons:
+   - Form not connected to sheet
+   - Dashboard cache (try hard refresh)
+   - API URL not configured
+   - Time delay (wait 2-3 minutes)
+   See Section 9.3 for detailed troubleshooting.
+
+
+================================================================
+================================================================
+SECTION 14: GLOSSARY
+================================================================
+================================================================
+
+-----------------------------------------------------------------
+API (Application Programming Interface)
+-----------------------------------------------------------------
+A way for different software to communicate.
+In this system, the dashboard talks to Google Sheets via API.
+
+-----------------------------------------------------------------
+Audit Trail
+-----------------------------------------------------------------
+A record of who did what and when.
+Apps Script logs keep track of all script executions.
+
+-----------------------------------------------------------------
+Backup
+-----------------------------------------------------------------
+A copy of your data saved for safety.
+This system creates automatic daily backups.
+
+-----------------------------------------------------------------
+CORS (Cross-Origin Resource Sharing)
+-----------------------------------------------------------------
+A security feature that controls which websites can access data.
+If you see "CORS error", the API needs reconfiguration.
+
+-----------------------------------------------------------------
+Dashboard
+-----------------------------------------------------------------
+A visual display showing key information at a glance.
+Like a car dashboard, it shows important metrics.
+
+-----------------------------------------------------------------
+Deployment
+-----------------------------------------------------------------
+Making software available for use.
+"Deploying" the Apps Script makes it accessible online.
+
+-----------------------------------------------------------------
+Form Response
+-----------------------------------------------------------------
+The data submitted when someone fills out a Google Form.
+Each submission creates one row in the linked sheet.
+
+-----------------------------------------------------------------
+GitHub Pages
+-----------------------------------------------------------------
+Free website hosting service by GitHub.
+We use it to host the dashboard.
+
+-----------------------------------------------------------------
+KPI (Key Performance Indicator)
+-----------------------------------------------------------------
+An important metric that shows how well something is performing.
+Example: "Average Lecture Score" is a KPI.
+
+-----------------------------------------------------------------
+Repository
+-----------------------------------------------------------------
+A storage location for code and files on GitHub.
+Like a folder for your project.
+
+-----------------------------------------------------------------
+Trigger
+-----------------------------------------------------------------
+An automation that runs code at specific times or events.
+Example: "Weekly report trigger" sends email every Monday.
+
+-----------------------------------------------------------------
+Web App
+-----------------------------------------------------------------
+An application accessed through a web browser.
+The dashboard is a web app.
+
+
+================================================================
+================================================================
+SECTION 15: COMPLETION CHECKLIST
+================================================================
+================================================================
+
+Before going live, verify ALL items are checked:
+
+================================================================
+SETUP VERIFICATION
+================================================================
+
+□ GOOGLE SHEETS (Section 3)
+  □ Spreadsheet created and named
+  □ All 8 sheets created with correct names
+  □ All headers added correctly
+  □ Named ranges created
+  □ Sharing configured
+
+□ GOOGLE FORMS (Section 4)
+  □ All 5 forms created
+  □ All questions added to each form
+  □ Forms connected to correct sheets
+  □ Form settings configured
+  □ Form links saved
+
+□ APPS SCRIPT (Section 5)
+  □ All 5 script files created
+  □ Code pasted into each file
+  □ Configuration updated (Spreadsheet ID, emails)
+  □ All 6 triggers set up
+  □ Script authorized
+  □ Web app deployed
+  □ Web app URL saved
+
+□ DASHBOARD (Section 6)
+  □ GitHub account created
+  □ Repository created
+  □ All 3 dashboard files uploaded
+  □ GitHub Pages enabled
+  □ API URL configured in dashboard.js
+  □ Dashboard loads correctly
+
+□ TESTING (Section 7)
+  □ Test form submission works
+  □ Data appears in sheet
+  □ Dashboard shows data
+  □ Email report sends
+  □ Alerts trigger properly
+
+□ DOCUMENTATION
+  □ Form links documented
+  □ Contact list updated
+  □ Team trained
+  □ This guide available to all
+
+================================================================
+FINAL SIGN-OFF
+================================================================
+
+System Setup Completed By: _______________________________
+
+Date: ___________________________________________________
+
+QC Lead Approval: _______________________________________
+
+IT Support Verification: _________________________________
+
+
+================================================================
+================================================================
+SECTION 16: SUPPORT AND CONTACTS
+================================================================
+================================================================
+
+================================================================
+16.1 GETTING HELP
+================================================================
+
+-----------------------------------------------------------------
+FOR TECHNICAL ISSUES:
+-----------------------------------------------------------------
+1. First, check Section 9 (Troubleshooting)
+2. If not resolved:
+   - Email IT Support
+   - Include:
+     □ Description of the problem
+     □ Steps to reproduce
+     □ Screenshot of error
+     □ When it started happening
+
+-----------------------------------------------------------------
+FOR PROCESS ISSUES:
+-----------------------------------------------------------------
+1. Contact QC Lead
+2. Describe the issue clearly
+3. Suggest improvements if you have ideas
+
+-----------------------------------------------------------------
+FOR TRAINING:
+-----------------------------------------------------------------
+1. Request training session from QC Lead
+2. Prepare specific questions
+3. Practice with sample data first
+
+================================================================
+16.2 CONTACT INFORMATION
+================================================================
+
+Fill in your organization's contacts:
+
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  QC Lead                                                    │
+│  Name:  _____________________________________________       │
+│  Email: _____________________________________________       │
+│  Phone: _____________________________________________       │
+│                                                             │
+│  IT Support                                                 │
+│  Email: _____________________________________________       │
+│  Phone: _____________________________________________       │
+│  Hours: _____________________________________________       │
+│                                                             │
+│  Department Head                                            │
+│  Name:  _____________________________________________       │
+│  Email: _____________________________________________       │
+│                                                             │
+│  Emergency Contact (after hours)                            │
+│  Phone: _____________________________________________       │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+================================================================
+16.3 USEFUL LINKS
+================================================================
+
+Google Drive: https://drive.google.com
+Google Sheets: https://sheets.google.com
+Google Forms: https://forms.google.com
+GitHub: https://github.com
+Apps Script: https://script.google.com
+
+
+================================================================
+END OF INSTRUCTIONS
+================================================================
+
+© 2026 Mathematics Department | Quality Control Automation System
+
+Document Version: 1.0
+Last Updated: 2026-01-15
+For Internal Use Only
+
+For updates to this document, contact QC Lead.
+
+================================================================

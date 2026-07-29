@@ -1,0 +1,609 @@
+================================================================
+INSTALLATION GUIDE
+MATHEMATICS DEPARTMENT QC AUTOMATION SYSTEM v2.1
+================================================================
+
+SIMPLIFIED SETUP:
+- ONE spreadsheet with tabs
+- 5 forms that connect to tabs
+- Automated email reports
+
+Estimated time: 45-60 minutes
+
+================================================================
+TABLE OF CONTENTS
+================================================================
+
+SECTION 1:  What You Need
+SECTION 2:  Create ONE Spreadsheet
+SECTION 3:  Create 5 Forms
+SECTION 4:  Connect Forms to Spreadsheet
+SECTION 5:  Add the Script Code
+SECTION 6:  Configure Your Settings
+SECTION 7:  Set Up Automation Triggers
+SECTION 8:  Test the System
+SECTION 9:  Troubleshooting
+SECTION 10: Daily Usage
+
+================================================================
+SECTION 1: WHAT YOU NEED
+================================================================
+
+BEFORE STARTING, GATHER:
+
+□ Google Account (Gmail)
+   → This is the Department Lead account
+   → Only this account has system access
+
+□ List of Faculty Names and Emails:
+   Name                     Email
+   ──────────────────────────────────────
+   Dr. Smith                smith@university.edu
+   Dr. Jones                jones@university.edu
+   Prof. Williams           williams@university.edu
+   (list all your faculty)
+
+□ List of Course Codes:
+   MATH101, MATH102, MATH201, etc.
+
+================================================================
+SECTION 2: CREATE ONE SPREADSHEET
+================================================================
+
+You need just ONE spreadsheet. All forms will connect to it.
+
+STEP 1: Go to Google Sheets
+---------------------------------
+   a) Open browser (Chrome recommended)
+   b) Go to: https://sheets.google.com
+   c) Sign in with your Google account
+
+STEP 2: Create New Spreadsheet
+---------------------------------
+   a) Click the big "+" button OR "Blank"
+   b) A new spreadsheet opens
+
+STEP 3: Name Your Spreadsheet
+---------------------------------
+   a) Click "Untitled spreadsheet" at top
+   b) Type: QC_System_Data
+   c) Press Enter
+
+STEP 4: Get Your Spreadsheet ID
+---------------------------------
+   Look at the URL in your browser:
+   
+   https://docs.google.com/spreadsheets/d/XXXXXXXXXXX/edit
+                                          ↑↑↑↑↑↑↑↑↑↑↑
+                                          THIS IS YOUR ID
+   
+   Copy this ID and save it. You'll need it later!
+
+   ✅ MY SPREADSHEET ID:
+   _________________________________________________
+
+STEP 5: Create Two Manual Tabs (Optional)
+-----------------------------------------
+   The forms will create their own tabs, but you can
+   pre-create these for the script:
+   
+   a) Click "+" at bottom to add new tab
+   b) Name it: Summary_Scores
+   c) Click "+" again
+   d) Name it: Dashboard_Data
+   
+   (If you skip this, the script creates them automatically)
+
+DONE! Your spreadsheet structure:
+┌─────────────────────────────────────────┐
+│           QC_System_Data                │
+├─────────────────────────────────────────┤
+│ Tab: Summary_Scores                     │
+│ Tab: Dashboard_Data                     │
+│ (Form tabs will be added when connected)│
+└─────────────────────────────────────────┘
+
+================================================================
+SECTION 3: CREATE 5 FORMS
+================================================================
+
+Create these 5 forms. Questions are FLEXIBLE - you can add,
+remove, or modify them later without breaking the system!
+
+3.1 HOW TO CREATE A FORM
+-------------------------
+
+STEP 1: Go to https://forms.google.com
+STEP 2: Click "Blank" to create new form
+STEP 3: Click "Untitled form" and type the name
+STEP 4: Add questions (see below)
+
+3.2 FORM 1: LECTURE OBSERVATION
+-------------------------------
+
+Name: Lecture Observation Form
+
+QUESTIONS TO ADD:
+
+Q1: "Observation Date"
+    Type: Date
+    Required: Yes
+
+Q2: "Course Code"
+    Type: Dropdown
+    Options: MATH101, MATH102, MATH201, etc.
+    Required: Yes
+
+Q3: "Instructor Name"
+    Type: Dropdown
+    Options: Dr. Smith, Dr. Jones, etc.
+    ⚠️ MUST match faculty email list exactly!
+    Required: Yes
+
+Q4: "Session Type"
+    Type: Multiple Choice
+    Options: Lecture, Lab, Tutorial
+    Required: Yes
+
+Q5: "Academic Correctness Score"
+    Type: Linear Scale
+    1 to 5 (1=Poor, 5=Excellent)
+    Required: Yes
+
+Q6: "Delivery Quality Score"
+    Type: Linear Scale
+    1 to 5
+    Required: Yes
+
+Q7: "Student Engagement Score"
+    Type: Linear Scale
+    1 to 5
+    Required: Yes
+
+Q8: "Board Work Quality Score"
+    Type: Linear Scale
+    1 to 5
+    Required: Yes
+
+Q9: "Pace Management Score"
+    Type: Linear Scale
+    1 to 5
+    Required: Yes
+
+Q10: "Strengths Observed"
+     Type: Paragraph
+     Required: No
+
+Q11: "Areas for Improvement"
+     Type: Paragraph
+     Required: Yes
+
+💡 TIP: Score columns MUST have "Score" or "Rating" in name!
+   The script finds them automatically.
+
+3.3 FORM 2: ASSESSMENT QC
+-------------------------
+
+Name: Assessment QC Form
+
+Questions:
+- Date
+- Course Code (dropdown)
+- Reviewer Name
+- Assessment Type (Exam, Quiz, Assignment)
+- Questions Reviewed (number)
+- Quality Score (linear scale 1-5)
+- Accuracy Score (linear scale 1-5)
+- Coverage Score (linear scale 1-5)
+- Final Decision (Pass, Needs Revision, Reject)
+- Comments
+
+3.4 FORM 3: RESEARCH QC
+-----------------------
+
+Name: Research QC Form
+
+Questions:
+- Date
+- Project Title
+- Student Names
+- Faculty Mentor (dropdown - same as instructor list)
+- Originality Score (linear scale 1-5)
+- Methodology Score (linear scale 1-5)
+- Analysis Score (linear scale 1-5)
+- Presentation Score (linear scale 1-5)
+- Status (In Progress, Complete, etc.)
+- Comments
+
+3.5 FORM 4: STUDENT FEEDBACK
+----------------------------
+
+Name: Student Feedback Form
+
+Questions:
+- Date
+- Course Code (dropdown)
+- Instructor Name (dropdown)
+- Subject Knowledge Rating (linear scale 1-5)
+- Teaching Clarity Rating (linear scale 1-5)
+- Engagement Rating (linear scale 1-5)
+- What's Working Well? (paragraph)
+- Suggested Improvements (paragraph)
+
+3.6 FORM 5: ACTION TRACKER
+--------------------------
+
+Name: Action Tracker Form
+
+Questions:
+- Date
+- Issue Type (Academic, Delivery, Process, etc.)
+- Severity (Critical, High, Medium, Low)
+- Description (paragraph)
+- Assigned To
+- Target Date
+- Status (Open, In Progress, Resolved)
+
+================================================================
+SECTION 4: CONNECT FORMS TO SPREADSHEET
+================================================================
+
+This is the key step! Each form connects to the SAME spreadsheet.
+Google automatically creates a tab for each form.
+
+FOR EACH OF THE 5 FORMS:
+
+STEP 1: Open the form (in edit mode)
+
+STEP 2: Click "Responses" tab at top
+
+STEP 3: Click the green Google Sheets icon
+
+STEP 4: Select "Select existing spreadsheet"
+
+STEP 5: Find and click "QC_System_Data"
+
+STEP 6: Click "Select"
+
+STEP 7: Google creates a new tab automatically!
+
+REPEAT for all 5 forms.
+
+After connecting all forms, your spreadsheet has:
+┌─────────────────────────────────────────────────────┐
+│                   QC_System_Data                    │
+├─────────────────────────────────────────────────────┤
+│ Tab: Lecture Observation Form (Responses)           │
+│ Tab: Assessment QC Form (Responses)                 │
+│ Tab: Research QC Form (Responses)                   │
+│ Tab: Student Feedback Form (Responses)              │
+│ Tab: Action Tracker Form (Responses)                │
+│ Tab: Summary_Scores                                 │
+│ Tab: Dashboard_Data                                 │
+└─────────────────────────────────────────────────────┘
+
+⚠️ Tab names are created by Google automatically.
+   The script finds them by keywords (lecture, assessment, etc.)
+   so exact names don't matter!
+
+================================================================
+SECTION 5: ADD THE SCRIPT CODE
+================================================================
+
+5.1 OPEN APPS SCRIPT
+--------------------
+
+STEP 1: Open your QC_System_Data spreadsheet
+
+STEP 2: Click "Extensions" menu
+
+STEP 3: Click "Apps Script"
+
+STEP 4: A new tab opens with script editor
+
+STEP 5: Click "Untitled project" and name it:
+        QC_Automation_System
+
+5.2 CREATE SCRIPT FILES
+-----------------------
+
+You need 3 script files. Delete the default Code.gs first.
+
+CREATE FILE 1: config
+   a) Click "+" next to Files
+   b) Select "Script"
+   c) Name it: config
+   d) Delete any default code
+
+CREATE FILE 2: processor
+   a) Click "+" next to Files
+   b) Select "Script"
+   c) Name it: processor
+
+CREATE FILE 3: emailBot
+   a) Click "+" next to Files
+   b) Select "Script"
+   c) Name it: emailBot
+
+Delete the original Code.gs:
+   a) Right-click Code.gs
+   b) Select "Remove"
+
+5.3 COPY CODE INTO FILES
+------------------------
+
+Open each file and paste the corresponding code from the
+package provided. The files are in: public/scripts/
+
+FILE: config.gs     → paste into "config"
+FILE: dynamicProcessor.gs → paste into "processor"
+FILE: emailBot.gs   → paste into "emailBot"
+
+After each paste, press Ctrl+S to save.
+
+================================================================
+SECTION 6: CONFIGURE YOUR SETTINGS
+================================================================
+
+Open the "config" file and update these values:
+
+6.1 SPREADSHEET ID
+------------------
+
+Find this line:
+   const SPREADSHEET_ID = '[YOUR_SPREADSHEET_ID]';
+
+Replace with your ID:
+   const SPREADSHEET_ID = '1aBcDeFgHiJkLmNoP';
+
+6.2 YOUR EMAIL
+--------------
+
+Find this line:
+   const LEAD_EMAIL = '[YOUR_LEAD_EMAIL]';
+
+Replace with your email:
+   const LEAD_EMAIL = 'you@university.edu';
+
+6.3 FACULTY EMAIL LIST
+----------------------
+
+Find the FACULTY_EMAILS section and add your faculty:
+
+const FACULTY_EMAILS = {
+  "Dr. Smith": "smith@university.edu",
+  "Dr. Jones": "jones@university.edu",
+  "Prof. Williams": "williams@university.edu",
+  // Add all your faculty here
+};
+
+⚠️ CRITICAL: Names MUST match EXACTLY what's in form dropdowns!
+
+6.4 SAVE
+--------
+
+Press Ctrl+S to save changes.
+
+================================================================
+SECTION 7: SET UP AUTOMATION TRIGGERS
+================================================================
+
+Triggers make the script run automatically.
+
+7.1 OPEN TRIGGERS
+-----------------
+
+STEP 1: In Apps Script, click clock icon ⏰ (left sidebar)
+STEP 2: Click "+ Add Trigger" (bottom right)
+
+7.2 TRIGGER 1: FORM SUBMIT
+--------------------------
+
+This runs when ANY form is submitted.
+
+Settings:
+- Choose function: onFormSubmit
+- Event source: From spreadsheet
+- Event type: On form submit
+
+Click "Save"
+
+7.3 AUTHORIZE THE SCRIPT
+------------------------
+
+First time, you'll see authorization popup:
+
+STEP 1: Click "Review permissions"
+STEP 2: Select your Google account
+STEP 3: Click "Advanced" (bottom left)
+STEP 4: Click "Go to QC_Automation_System (unsafe)"
+STEP 5: Click "Allow"
+
+⚠️ "Unsafe" warning is normal for personal scripts.
+   Google hasn't reviewed YOUR script - that's OK!
+
+7.4 TRIGGER 2: WEEKLY SUMMARY
+-----------------------------
+
+Click "+ Add Trigger" again:
+
+Settings:
+- Choose function: sendWeeklySummary
+- Event source: Time-driven
+- Type: Week timer
+- Day: Monday
+- Time: 8am to 9am
+
+Click "Save"
+
+7.5 TRIGGER 3: MONTHLY REPORT (Optional)
+----------------------------------------
+
+Click "+ Add Trigger" again:
+
+Settings:
+- Choose function: sendMonthlyReport
+- Event source: Time-driven
+- Type: Month timer
+- Day: 1
+- Time: 9am to 10am
+
+Click "Save"
+
+================================================================
+SECTION 8: TEST THE SYSTEM
+================================================================
+
+8.1 TEST FORM SUBMISSION
+------------------------
+
+STEP 1: Open Lecture Observation Form
+STEP 2: Fill with test data:
+   - Date: Today
+   - Course: MATH101
+   - Instructor: Dr. Smith (must be in your list!)
+   - Scores: Give various 1-5 ratings
+   - Fill other fields
+STEP 3: Click Submit
+
+8.2 CHECK SPREADSHEET
+---------------------
+
+STEP 1: Open QC_System_Data
+STEP 2: Check the form's tab - data should appear
+STEP 3: Check Summary_Scores tab - calculated score should appear
+
+Example in Summary_Scores:
+| Date       | Faculty   | Course  | Score | Max | Percentage |
+|------------|-----------|---------|-------|-----|------------|
+| 2026-01-15 | Dr. Smith | MATH101 | 22    | 25  | 88%        |
+
+8.3 CHECK EMAIL
+---------------
+
+STEP 1: Check Dr. Smith's email inbox
+STEP 2: Should receive QC report
+STEP 3: Check spam folder if not in inbox
+STEP 4: Lead should be CC'd
+
+8.4 ALL TESTS CHECKLIST
+-----------------------
+
+□ Form submits successfully
+□ Data appears in form's tab
+□ Score appears in Summary_Scores tab
+□ Score calculated correctly (sum of ratings / max)
+□ Email sent to faculty
+□ Email CC'd to lead
+
+================================================================
+SECTION 9: TROUBLESHOOTING
+================================================================
+
+PROBLEM: Form submitted but no data in sheet
+SOLUTION:
+□ Check form is connected to correct spreadsheet
+□ Open form → Responses → Check Sheets icon shows connection
+□ Reconnect if needed
+
+PROBLEM: Score not appearing in Summary_Scores
+SOLUTION:
+□ Check trigger is set up (clock icon in Apps Script)
+□ Check Executions log for errors
+□ Verify column headers contain "Score" or "Rating"
+
+PROBLEM: Email not received
+SOLUTION:
+□ Check spam folder
+□ Verify faculty name in form matches FACULTY_EMAILS exactly
+□ Check LEAD_EMAIL is configured
+□ Run sendWeeklySummary() manually to test
+
+PROBLEM: Script error
+SOLUTION:
+□ Check Executions log (left sidebar)
+□ Verify SPREADSHEET_ID is correct
+□ Verify all required settings are configured
+□ Remove [brackets] from placeholder values
+
+PROBLEM: Wrong tab detected
+SOLUTION:
+□ Tab name should contain keyword (lecture, assessment, etc.)
+□ Check TAB_KEYWORDS in config matches your tab names
+□ Rename tab to include keyword
+
+================================================================
+SECTION 10: DAILY USAGE
+================================================================
+
+10.1 FOR QC OBSERVERS
+---------------------
+
+Your job is simple:
+1. Observe lecture/lab
+2. Open form link (bookmark it!)
+3. Fill the form immediately after
+4. Submit
+5. Done! Email sends automatically.
+
+10.2 FOR DEPARTMENT LEAD
+------------------------
+
+Check dashboard weekly for:
+□ Score trends
+□ Low score alerts
+□ Action items status
+
+Weekly email arrives Monday with:
+□ All faculty scores
+□ Summary statistics
+□ Any alerts
+
+10.3 FOR FACULTY
+----------------
+
+You don't need to login!
+You'll receive:
+□ Email after each observation
+□ Weekly summary (Mondays)
+
+Just check your email.
+
+================================================================
+QUICK REFERENCE CARD
+================================================================
+
+SPREADSHEET: QC_System_Data
+SPREADSHEET ID: _________________________________
+
+FORM LINKS:
+□ Lecture Observation: _________________________________
+□ Assessment QC: _________________________________
+□ Research QC: _________________________________
+□ Student Feedback: _________________________________
+□ Action Tracker: _________________________________
+
+TABS IN SPREADSHEET:
+□ Lecture... (Responses) - Form 1 data
+□ Assessment... (Responses) - Form 2 data
+□ Research... (Responses) - Form 3 data
+□ Student... (Responses) - Form 4 data
+□ Action... (Responses) - Form 5 data
+□ Summary_Scores - All calculated scores
+□ Dashboard_Data - For dashboard
+
+CONTACTS:
+□ Lead Email: _________________________________
+□ IT Support: _________________________________
+
+================================================================
+END OF INSTALLATION GUIDE
+================================================================
+
+Version: 2.1.0
+Date: 2026-01-15
+
+For issues, check:
+1. This guide (Section 9)
+2. changesmade.txt
+3. Contact IT Support
