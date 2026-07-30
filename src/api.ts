@@ -253,6 +253,18 @@ export function transformApiData(apiData: any) {
     }
   });
 
+  // Build instructor table from faculty stats (LIVE data)
+  const instructors = facultyNames.map(name => {
+    const s = facultyStats[name];
+    return {
+      name: name,
+      observations: s.count || 0,
+      avgScore: s.averageMax > 0 ? ((s.averageScore / s.averageMax) * 5).toFixed(2) : '0',
+      errors: 0,
+      satisfaction: s.averageMax > 0 ? ((s.averageScore / s.averageMax) * 5).toFixed(2) : '0'
+    };
+  });
+
   return {
     kpis,
     trends,
@@ -260,6 +272,7 @@ export function transformApiData(apiData: any) {
     alerts,
     recent,
     summary,
+    instructors,
     lastUpdated: apiData.lastUpdated || new Date().toISOString()
   };
 }
