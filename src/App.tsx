@@ -16,7 +16,7 @@ import {
   BarChart3,
   Activity
 } from 'lucide-react';
-import { format } from 'date-fns';
+import { safeFormatFullDate, safeFormatTime } from './utils/safeDate';
 
 // Components
 import { KPICard } from './components/KPICard';
@@ -97,7 +97,7 @@ function App() {
             <div className="flex items-center gap-4">
               <div className="hidden sm:flex items-center gap-2 text-sm text-blue-100 bg-white/10 px-3 py-1.5 rounded-lg">
                 <Calendar className="w-4 h-4" />
-                <span>{format(new Date(), 'EEEE, MMMM d, yyyy')}</span>
+                <span>{safeFormatFullDate()}</span>
               </div>
 
               <div className="relative">
@@ -157,7 +157,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <Activity className="w-4 h-4 text-green-500" />
-            <span>Last updated: {format(lastRefresh, 'h:mm:ss a')}</span>
+            <span>Last updated: {safeFormatTime(lastRefresh)}</span>
           </div>
           <div className="flex items-center gap-3">
             <a
