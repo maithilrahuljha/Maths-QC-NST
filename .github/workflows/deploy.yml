@@ -6,13 +6,13 @@ on:
       - main
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# IMPORTANT: contents must be 'write' (not 'read') when using enablement: true
+# enablement: true auto-enables GitHub Pages via API — needs write access
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -45,8 +45,12 @@ jobs:
           echo "=== dist/ size ==="
           du -sh dist/
 
+      # enablement: true → automatically creates/enables GitHub Pages site
+      # so you do NOT need to manually go to Settings → Pages first
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
