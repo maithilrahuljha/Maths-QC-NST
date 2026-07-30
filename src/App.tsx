@@ -264,45 +264,37 @@ function App() {
                 status={getKPIStatus(data.kpis.avgLectureScore.current, data.kpis.avgLectureScore.target || 4.0)}
               />
               <KPICard
-                title="Rehearsal Compliance"
-                value={data.kpis.rehearsalCompliance.current}
-                suffix="%"
-                change={data.kpis.rehearsalCompliance.change}
-                target={data.kpis.rehearsalCompliance.target}
-                icon={<ClipboardCheck className="w-5 h-5" />}
-                status={getKPIStatus(data.kpis.rehearsalCompliance.current, data.kpis.rehearsalCompliance.target || 100)}
+                title="Student Feedback"
+                value={data.kpis.feedbackCount?.current || 0}
+                change={data.kpis.feedbackCount?.change}
+                target={data.kpis.feedbackCount?.target}
+                icon={<Users className="w-5 h-5" />}
+                status={getKPIStatus(data.kpis.feedbackCount?.current || 0, data.kpis.feedbackCount?.target || 10)}
               />
               <KPICard
-                title="Content Errors"
-                value={data.kpis.contentErrors.current}
-                change={data.kpis.contentErrors.change}
-                target={data.kpis.contentErrors.target}
-                lowerIsBetter={true}
-                icon={<AlertTriangle className="w-5 h-5" />}
-                status={getKPIStatus(data.kpis.contentErrors.current, data.kpis.contentErrors.target || 0, true)}
+                title="Actions Resolved"
+                value={data.kpis.actionsResolved.current}
+                icon={<ClipboardCheck className="w-5 h-5" />}
+                status="success"
               />
             </div>
 
             {/* Second Row KPIs */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <KPICard
-                title="Student Satisfaction"
+                title="Avg Faculty Score"
                 value={data.kpis.studentSatisfaction.current.toFixed(2)}
                 suffix="/5"
                 change={data.kpis.studentSatisfaction.change}
                 target={data.kpis.studentSatisfaction.target}
-                icon={<Users className="w-5 h-5" />}
+                icon={<TrendingUp className="w-5 h-5" />}
                 status={getKPIStatus(data.kpis.studentSatisfaction.current, data.kpis.studentSatisfaction.target || 4.0)}
               />
               <KPICard
-                title="Assessment Error Rate"
-                value={data.kpis.assessmentErrorRate.current.toFixed(1)}
-                suffix="%"
-                change={data.kpis.assessmentErrorRate.change}
-                target={data.kpis.assessmentErrorRate.target}
-                lowerIsBetter={true}
+                title="Assessments Reviewed"
+                value={data.kpis.assessmentsReviewed.current}
                 icon={<FileText className="w-5 h-5" />}
-                status={getKPIStatus(data.kpis.assessmentErrorRate.current, data.kpis.assessmentErrorRate.target || 1, true)}
+                status="neutral"
               />
               <KPICard
                 title="Open Actions"
