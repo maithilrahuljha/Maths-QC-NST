@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
   RefreshCw,
-  Download,
   Settings,
   Bell,
   BookOpen,
@@ -30,6 +29,7 @@ import { InstructorTable } from './components/InstructorTable';
 // Data
 import { mockDashboardData, mockInstructorData, mockScoreDistribution } from './data/mockData';
 import { DashboardData } from './types';
+import { isApiConfigured, fetchLiveData, transformApiData, getApiUrl, setApiUrl, getRefreshInterval, setRefreshInterval } from './api';
 
 function App() {
   const [data, setData] = useState<DashboardData>(mockDashboardData);
@@ -37,23 +37,46 @@ function App() {
   const [lastRefresh, setLastRefresh] = useState(new Date());
   const [activeTab, setActiveTab] = useState('overview');
   const [showSettings, setShowSettings] = useState(false);
+  const [dataSource, setDataSource] = useState<'live' | 'demo'>(isApiConfigured() ? 'live' : 'demo');
+  const [apiUrlInput, setApiUrlInput] = useState(getApiUrl());
+  const [refreshMinutes, setRefreshMinutes] = useState(getRefreshInterval());
+  const [connectionError, setConnectionError] = useState('');
 
-  // Simulate data refresh
+  // Fetch data — tries live API first, falls back to demo
   const refreshData = async () => {
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setData({
-      ...mockDashboardData,
-      lastUpdated: new Date().toISOString()
-    });
+    setConnectionError('');
+
+    try {
+      if (isApiConfigured()) {
+        const apiData = await fetchLiveData();
+        const transformed = transformApiData(apiData);
+        setData(transformed as DashboardData);
+        setDataSource('live');
+      } else {
+        setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
+        setDataSource('demo');
+      }
+    } catch (err: any) {
+      console.warn('API fetch failed, using demo data:', err.message);
+      setConnectionError(err.message);
+      setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
+      setDataSource('demo');
+    }
+
     setLastRefresh(new Date());
     setIsLoading(false);
   };
 
-  // Auto-refresh every 5 minutes
+  // Load data on first render
   useEffect(() => {
-    const interval = setInterval(refreshData, 5 * 60 * 1000);
+    refreshData();
+  }, []);
+
+  // Auto-refresh
+  useEffect(() => {
+    const ms = getRefreshInterval() * 60 * 1000;
+    const interval = setInterval(refreshData, ms);
     return () => clearInterval(interval);
   }, []);
 
@@ -154,27 +177,32 @@ function App() {
 
       {/* Last Updated Banner */}
       <div className="bg-white border-b border-gray-200 py-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <Activity className="w-4 h-4 text-green-500" />
-            <span>Last updated: {safeFormatTime(lastRefresh)}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center gap-2">
+              <Activity className={`w-4 h-4 ${dataSource === 'live' ? 'text-green-500' : 'text-amber-500'}`} />
+              <span>Last updated: {safeFormatTime(lastRefresh)}</span>
+            </div>
+            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+              dataSource === 'live'
+                ? 'bg-green-100 text-green-700'
+                : 'bg-amber-100 text-amber-700'
+            }`}>
+              {dataSource === 'live' ? '● Live Data' : '● Demo Data'}
+            </span>
+            {connectionError && (
+              <span className="text-xs text-red-500">Connection failed</span>
+            )}
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="#"
+          {dataSource === 'demo' && !isApiConfigured() && (
+            <button
+              onClick={() => setShowSettings(true)}
               className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
             >
-              <FileText className="w-4 h-4" />
-              View Reports
-            </a>
-            <a
-              href="#"
-              className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1"
-            >
-              <Download className="w-4 h-4" />
-              Export Data
-            </a>
-          </div>
+              <Settings className="w-4 h-4" />
+              Connect to Spreadsheet
+            </button>
+          )}
         </div>
       </div>
 
@@ -444,45 +472,62 @@ function App() {
       {showSettings && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowSettings(false)}>
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Dashboard Settings</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Connect to Google Spreadsheet</h3>
+            <p className="text-sm text-gray-500 mb-4">Paste your Apps Script Web App URL to show live data from your spreadsheet.</p>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Data Source</label>
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                  <option>Demo Data (Current)</option>
-                  <option>Google Sheets API</option>
-                </select>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Apps Script Web App URL</label>
+                <input
+                  type="text"
+                  value={apiUrlInput}
+                  onChange={e => setApiUrlInput(e.target.value)}
+                  placeholder="https://script.google.com/macros/s/.../exec"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
+                />
+                <p className="text-xs text-gray-400 mt-1">From installation.txt Section 18 — Deploy as Web App</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Auto Refresh Interval</label>
-                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                  <option>5 minutes</option>
-                  <option>10 minutes</option>
-                  <option>15 minutes</option>
-                  <option>30 minutes</option>
+                <select
+                  value={refreshMinutes}
+                  onChange={e => setRefreshMinutes(parseInt(e.target.value))}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="1">1 minute</option>
+                  <option value="5">5 minutes</option>
+                  <option value="10">10 minutes</option>
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
                 </select>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Apps Script URL</label>
-                <input 
-                  type="text" 
-                  placeholder="https://script.google.com/macros/s/..."
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                />
+              <div className={`p-3 rounded-lg text-sm ${
+                isApiConfigured() ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
+              }`}>
+                {isApiConfigured()
+                  ? '✅ Connected — Dashboard is showing live spreadsheet data'
+                  : '⚠️ Not connected — Dashboard is showing demo data'}
               </div>
             </div>
             <div className="flex justify-end gap-3 mt-6">
-              <button 
-                onClick={() => setShowSettings(false)}
+              <button
+                onClick={() => { setApiUrlInput(getApiUrl()); setShowSettings(false); }}
                 className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 Cancel
               </button>
-              <button 
-                onClick={() => setShowSettings(false)}
+              {isApiConfigured() && (
+                <button
+                  onClick={() => { setApiUrl(''); setApiUrlInput(''); setConnectionError(''); refreshData(); }}
+                  className="px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  Disconnect
+                </button>
+              )}
+              <button
+                onClick={() => { setApiUrl(apiUrlInput); setRefreshInterval(refreshMinutes); setShowSettings(false); refreshData(); }}
                 className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Save Changes
+                Save & Connect
               </button>
             </div>
           </div>
