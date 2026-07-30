@@ -51,15 +51,20 @@ function App() {
       if (isApiConfigured()) {
         const apiData = await fetchLiveData();
         const transformed = transformApiData(apiData);
-        setData(transformed as DashboardData);
-        setDataSource('live');
+        // Validate transformed data has required shape before setting
+        if (transformed && transformed.kpis && transformed.trends) {
+          setData(transformed as DashboardData);
+          setDataSource('live');
+        } else {
+          throw new Error('API returned data in unexpected format');
+        }
       } else {
         setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
         setDataSource('demo');
       }
     } catch (err: any) {
-      console.warn('API fetch failed, using demo data:', err.message);
-      setConnectionError(err.message);
+      console.warn('API fetch failed, using demo data:', err?.message || 'Unknown error');
+      setConnectionError(err?.message || 'Connection failed');
       setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
       setDataSource('demo');
     }
@@ -71,6 +76,7 @@ function App() {
   // Load data on first render
   useEffect(() => {
     refreshData();
+    // eslint-disable-next-line
   }, []);
 
   // Auto-refresh
@@ -78,6 +84,7 @@ function App() {
     const ms = getRefreshInterval() * 60 * 1000;
     const interval = setInterval(refreshData, ms);
     return () => clearInterval(interval);
+    // eslint-disable-next-line
   }, []);
 
   const getKPIStatus = (current: number, target: number, lowerIsBetter = false): 'success' | 'warning' | 'danger' => {
