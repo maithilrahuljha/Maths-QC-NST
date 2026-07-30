@@ -10,7 +10,6 @@ import {
   TrendingUp,
   FileText,
   Calendar,
-  ExternalLink,
   FlaskConical,
   BarChart3,
   Activity
@@ -417,12 +416,11 @@ function App() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900">Open Action Items</h3>
-                <button className="text-sm text-blue-600 hover:text-blue-700 flex items-center gap-1">
-                  <ExternalLink className="w-4 h-4" />
-                  View All
-                </button>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                  dataSource === 'live' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+                }`}>{dataSource === 'live' ? '● Live Data' : '● Demo Data'}</span>
               </div>
-              <ActionItemsTable actions={data.actions} />
+              <ActionItemsTable actions={data.actions} onResolved={refreshData} />
             </div>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
