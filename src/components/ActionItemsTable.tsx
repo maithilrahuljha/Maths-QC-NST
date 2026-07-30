@@ -1,6 +1,6 @@
 import { Clock, AlertTriangle, CheckCircle2, Circle, ChevronRight } from 'lucide-react';
 import { ActionItem } from '../types';
-import { format, parseISO } from 'date-fns';
+import { safeFormatDate } from '../utils/safeDate';
 
 interface ActionItemsTableProps {
   actions: ActionItem[];
@@ -28,7 +28,7 @@ export function ActionItemsTable({ actions, onViewDetails }: ActionItemsTablePro
       case 'Resolved':
         return <CheckCircle2 className="w-4 h-4 text-green-500" />;
       case 'In Progress':
-        return <Clock className="w-4 h-4 text-blue-500 animate-pulse" />;
+        return <Clock className="w-4 h-4 text-blue-500" />;
       default:
         return <Circle className="w-4 h-4 text-gray-400" />;
     }
@@ -60,11 +60,10 @@ export function ActionItemsTable({ actions, onViewDetails }: ActionItemsTablePro
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {actions.map((action, index) => (
+            {actions.map((action) => (
               <tr 
                 key={action.issueId}
                 className={`hover:bg-gray-50 transition-colors ${action.isOverdue ? 'bg-red-50/50' : ''}`}
-                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <td className="px-4 py-3">
                   <span className="font-mono text-sm font-medium text-gray-900">{action.issueId}</span>
@@ -88,7 +87,7 @@ export function ActionItemsTable({ actions, onViewDetails }: ActionItemsTablePro
                   <div className="flex items-center gap-1">
                     {action.isOverdue && <AlertTriangle className="w-3 h-3 text-red-500" />}
                     <span className={`text-sm ${action.isOverdue ? 'text-red-600 font-medium' : 'text-gray-700'}`}>
-                      {format(parseISO(action.targetDate), 'MMM d, yyyy')}
+                      {safeFormatDate(action.targetDate)}
                     </span>
                   </div>
                   {action.isOverdue && (
