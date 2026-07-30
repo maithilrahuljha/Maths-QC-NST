@@ -11,14 +11,17 @@
  * 6. Apps Script reads your Google Sheet and returns JSON
  * 
  * If no URL is configured, the dashboard shows demo data.
+ * 
+ * APPS SCRIPT CORS NOTES:
+ * - Apps Script Web Apps redirect (302) on first request
+ * - fetch with redirect:'follow' handles this automatically
+ * - Response comes as text that needs JSON.parse
+ * - If "Who has access" is set to "Anyone", no auth needed
  */
 
 const STORAGE_KEY = 'qc_api_url';
 const REFRESH_KEY = 'qc_refresh_interval';
 
-/**
- * Get the saved API URL from browser storage
- */
 export function getApiUrl(): string {
   try {
     return localStorage.getItem(STORAGE_KEY) || '';
@@ -27,20 +30,12 @@ export function getApiUrl(): string {
   }
 }
 
-/**
- * Save the API URL to browser storage
- */
 export function setApiUrl(url: string): void {
   try {
     localStorage.setItem(STORAGE_KEY, url.trim());
-  } catch {
-    // localStorage not available
-  }
+  } catch { /* localStorage not available */ }
 }
 
-/**
- * Get refresh interval in minutes
- */
 export function getRefreshInterval(): number {
   try {
     return parseInt(localStorage.getItem(REFRESH_KEY) || '5') || 5;
@@ -49,20 +44,12 @@ export function getRefreshInterval(): number {
   }
 }
 
-/**
- * Save refresh interval
- */
 export function setRefreshInterval(minutes: number): void {
   try {
     localStorage.setItem(REFRESH_KEY, String(minutes));
-  } catch {
-    // localStorage not available
-  }
+  } catch { /* localStorage not available */ }
 }
 
-/**
- * Check if API URL is configured
- */
 export function isApiConfigured(): boolean {
   const url = getApiUrl();
   return url.length > 0 && url.startsWith('http');
@@ -71,11 +58,11 @@ export function isApiConfigured(): boolean {
 /**
  * Fetch data from Google Apps Script Web App
  * 
- * The Apps Script doGet() function returns JSON with:
- * - scores: array of faculty score records
- * - recentObservations: last 10 observations
- * - facultyStats: per-faculty averages
- * - lastUpdated: timestamp
+ * Apps Script quirks handled here:
+ * 1. It returns 302 redirect — we follow it
+ * 2. Response may be text, not JSON content-type — we parse manually
+ * 3. CORS works only when "Who has access" = "Anyone"
+ * 4. If permissions wrong, returns HTML login page — we detect this
  */
 export async function fetchLiveData(): Promise<any> {
   const url = getApiUrl();
@@ -84,21 +71,66 @@ export async function fetchLiveData(): Promise<any> {
     throw new Error('API URL not configured');
   }
 
-  // Apps Script Web Apps return JSON via doGet()
-  // We call ?action=getData to get all dashboard data
-  const response = await fetch(`${url}?action=getData`, {
-    method: 'GET',
-    redirect: 'follow', // Apps Script redirects on first call
-  });
+  // Clean the URL — remove trailing slashes, ensure no double ?
+  const cleanUrl = url.replace(/\/+$/, '');
+  const separator = cleanUrl.includes('?') ? '&' : '?';
+  const fullUrl = `${cleanUrl}${separator}action=getData`;
 
-  if (!response.ok) {
-    throw new Error(`API returned ${response.status}`);
+  let response: Response;
+  
+  try {
+    response = await fetch(fullUrl, {
+      method: 'GET',
+      redirect: 'follow',
+      headers: {
+        'Accept': 'application/json, text/plain, */*'
+      }
+    });
+  } catch (networkError: any) {
+    // Network errors (CORS blocked, offline, DNS failure)
+    throw new Error(
+      'Cannot reach Apps Script. Check:\n' +
+      '1. URL is correct\n' +
+      '2. Apps Script is deployed as Web App\n' +
+      '3. "Who has access" is set to "Anyone"\n' +
+      '4. You redeployed after adding api.gs\n' +
+      'Network error: ' + networkError.message
+    );
   }
 
-  const data = await response.json();
+  // Get the response as text first (Apps Script may not set JSON content-type)
+  const text = await response.text();
 
+  // Check if we got HTML instead of JSON (means Google login page = wrong permissions)
+  if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+    throw new Error(
+      'Apps Script returned a login page instead of data.\n' +
+      'Fix: Open Apps Script → Deploy → Manage deployments → Edit\n' +
+      '→ Set "Who has access" to "Anyone"\n' +
+      '→ Click Deploy (creates new version)'
+    );
+  }
+
+  // Check for empty response
+  if (!text.trim()) {
+    throw new Error('Apps Script returned empty response. Check if api.gs is deployed.');
+  }
+
+  // Try to parse as JSON
+  let data: any;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error(
+      'Apps Script returned invalid data (not JSON).\n' + 
+      'Check that api.gs file is in your Apps Script project\n' +
+      'and that you redeployed as a new version.'
+    );
+  }
+
+  // Check for error in response
   if (data.error) {
-    throw new Error(data.error);
+    throw new Error('Apps Script error: ' + data.error);
   }
 
   return data;
@@ -106,38 +138,35 @@ export async function fetchLiveData(): Promise<any> {
 
 /**
  * Transform Apps Script response into dashboard format
- * 
- * Apps Script returns raw sheet data.
- * This function maps it to the format the dashboard expects.
  */
 export function transformApiData(apiData: any) {
   const facultyStats = apiData.facultyStats || {};
   const recentObs = apiData.recentObservations || [];
   const scores = apiData.scores || [];
   
-  // Count totals
   const facultyNames = Object.keys(facultyStats);
   const overallAvg = facultyNames.length > 0
     ? Math.round(facultyNames.reduce(
-        (sum, name) => sum + (facultyStats[name]?.averagePercentage || 0), 0
+        (sum: number, name: string) => sum + (facultyStats[name]?.averagePercentage || 0), 0
       ) / facultyNames.length)
     : 0;
   
-  // Get recent week data
+  // Count recent scores
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const recentScores = scores.filter((s: any) => new Date(s.date) >= oneWeekAgo);
+  const recentScores = scores.filter((s: any) => {
+    try { return new Date(s.date) >= oneWeekAgo; } catch { return false; }
+  });
   
-  // Build KPIs
   const kpis = {
     lecturesObserved: {
-      current: recentScores.length,
+      current: recentScores.length || scores.length,
       previous: 0,
       change: 0,
       target: 20
     },
     avgLectureScore: {
-      current: overallAvg ? (overallAvg / 100) * 5 : 0,
+      current: overallAvg ? parseFloat(((overallAvg / 100) * 5).toFixed(2)) : 0,
       previous: 0,
       change: 0,
       target: 4.0
@@ -148,51 +177,28 @@ export function transformApiData(apiData: any) {
       change: 0,
       target: 100
     },
-    contentErrors: {
-      current: 0,
-      previous: 0,
-      change: 0,
-      target: 0
-    },
+    contentErrors: { current: 0, previous: 0, change: 0, target: 0 },
     assessmentsReviewed: {
       current: scores.filter((s: any) => s.formType === 'ASSESSMENTS').length,
-      previous: 0,
-      change: 0,
-      target: 10
+      previous: 0, change: 0, target: 10
     },
-    assessmentErrorRate: {
-      current: 0,
-      previous: 0,
-      change: 0,
-      target: 1.0
-    },
+    assessmentErrorRate: { current: 0, previous: 0, change: 0, target: 1.0 },
     studentSatisfaction: {
-      current: overallAvg ? (overallAvg / 100) * 5 : 0,
-      previous: 0,
-      change: 0,
-      target: 4.0
+      current: overallAvg ? parseFloat(((overallAvg / 100) * 5).toFixed(2)) : 0,
+      previous: 0, change: 0, target: 4.0
     },
-    openActions: {
-      current: 0,
-      critical: 0,
-      high: 0
-    },
-    actionsResolved: {
-      current: 0,
-      previous: 0,
-      change: 0
-    },
+    openActions: { current: 0, critical: 0, high: 0 },
+    actionsResolved: { current: 0, previous: 0, change: 0 },
     activeResearch: {
       current: scores.filter((s: any) => s.formType === 'RESEARCH').length,
-      previous: 0,
-      change: 0
+      previous: 0, change: 0
     }
   };
 
-  // Build trends (last 12 data points or pad with zeros)
+  // Build trends
   const trendScores = scores.slice(-12).map((s: any) => {
     const pct = parseFloat(String(s.percentage).replace('%', '')) || 0;
-    return (pct / 100) * 5;
+    return parseFloat(((pct / 100) * 5).toFixed(2));
   });
   while (trendScores.length < 12) trendScores.unshift(0);
   
@@ -204,7 +210,7 @@ export function transformApiData(apiData: any) {
     actionsResolved: trendScores.map(() => 0)
   };
 
-  // Build summary table
+  // Build summary from faculty stats
   const summary = facultyNames.map(name => {
     const s = facultyStats[name];
     return {
@@ -212,18 +218,18 @@ export function transformApiData(apiData: any) {
       currentWeek: `${s.averageScore}/${s.averageMax}`,
       lastWeek: '--',
       changePercent: `${s.averagePercentage}%`,
-      target: '20/25',
+      target: `${s.averageMax}`,
       status: s.averagePercentage >= 80 ? '✅' : s.averagePercentage >= 60 ? '⚠️' : '❌',
       trendIcon: '→'
     };
   });
 
-  // Build recent activity
+  // Build activity feed
   const recent = recentObs.slice(0, 8).map((obs: any) => ({
     type: 'observation',
     icon: '📋',
     description: `${obs.faculty || 'Unknown'} — ${obs.course || ''} — ${obs.score}/${obs.max} (${obs.percentage})`,
-    timestamp: obs.date ? new Date(obs.date).toISOString() : new Date().toISOString()
+    timestamp: obs.date || new Date().toISOString()
   }));
 
   // Build alerts
@@ -235,6 +241,13 @@ export function transformApiData(apiData: any) {
         type: 'danger' as const,
         category: 'Low Score',
         message: `${name} average is ${s.averagePercentage}% — below 60% threshold`,
+        timestamp: new Date().toISOString()
+      });
+    } else if (s.averagePercentage < 80) {
+      alerts.push({
+        type: 'warning' as const,
+        category: 'Below Target',
+        message: `${name} average is ${s.averagePercentage}% — below 80% target`,
         timestamp: new Date().toISOString()
       });
     }
