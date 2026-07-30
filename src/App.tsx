@@ -42,6 +42,7 @@ function App() {
   const [refreshMinutes, setRefreshMinutes] = useState(getRefreshInterval());
   const [connectionError, setConnectionError] = useState('');
   const [instructorData, setInstructorData] = useState(mockInstructorData);
+  const [researchData, setResearchData] = useState<any[]>([]);
 
   // Fetch data — tries live API first, falls back to demo
   const refreshData = async () => {
@@ -56,10 +57,14 @@ function App() {
         if (transformed && transformed.kpis && transformed.trends) {
           setData(transformed as DashboardData);
           setDataSource('live');
-          // Set live instructor data if available
-          if (transformed.instructors && transformed.instructors.length > 0) {
-            setInstructorData(transformed.instructors);
-          }
+          // Set live instructor data — use empty array if no data (not mock)
+          setInstructorData(
+            transformed.instructors && transformed.instructors.length > 0
+              ? transformed.instructors
+              : []
+          );
+          // Set research data
+          setResearchData(transformed.research || []);
         } else {
           throw new Error('API returned data in unexpected format');
         }
@@ -73,6 +78,7 @@ function App() {
       setConnectionError(err?.message || 'Connection failed');
       setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
       setInstructorData(mockInstructorData);
+      setResearchData([]);
       setDataSource('demo');
     }
 
@@ -446,23 +452,56 @@ function App() {
         {/* Research Tab */}
         {activeTab === 'research' && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                <FlaskConical className="w-6 h-6 text-indigo-600" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                  <FlaskConical className="w-6 h-6 text-indigo-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">Research Projects</h3>
+                  <p className="text-sm text-gray-500">{researchData.length} project{researchData.length !== 1 ? 's' : ''} tracked</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">Research Projects</h3>
-                <p className="text-sm text-gray-500">{data.kpis.activeResearch.current} active projects</p>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                dataSource === 'live' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+              }`}>{dataSource === 'live' ? '● Live Data' : '● Demo Data'}</span>
+            </div>
+            {researchData.length > 0 ? (
+              <div className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-200">
+                      {Object.keys(researchData[0]).filter(k => !k.startsWith('_')).slice(0, 8).map(key => (
+                        <th key={key} className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">{key}</th>
+                      ))}
+                      <th className="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {researchData.map((project: any, idx: number) => (
+                      <tr key={idx} className="hover:bg-gray-50">
+                        {Object.entries(project).filter(([k]) => !k.startsWith('_')).slice(0, 8).map(([key, val]) => (
+                          <td key={key} className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate">{String(val)}</td>
+                        ))}
+                        <td className="px-4 py-3 text-center">
+                          {project._score > 0 ? (
+                            <span className={`font-semibold ${project._percentage >= 80 ? 'text-green-600' : project._percentage >= 60 ? 'text-amber-600' : 'text-red-600'}`}>
+                              {project._score}/{project._maxScore} ({project._percentage}%)
+                            </span>
+                          ) : <span className="text-gray-400">—</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </div>
-            <div className="text-center py-12 text-gray-500">
-              <FlaskConical className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-              <p className="text-lg font-medium">Research QC Dashboard</p>
-              <p className="text-sm mt-2">Connect to your Google Sheets to view research project data</p>
-              <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                Configure Data Source
-              </button>
-            </div>
+            ) : (
+              <div className="text-center py-12 text-gray-500">
+                <FlaskConical className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                <p className="text-lg font-medium">No Research Data</p>
+                <p className="text-sm mt-2">{dataSource === 'demo' ? 'Connect to your spreadsheet to see data' : 'Submit research QC forms to see projects here'}</p>
+              </div>
+            )}
           </div>
         )}
       </main>
