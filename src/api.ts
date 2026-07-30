@@ -143,6 +143,8 @@ export function transformApiData(apiData: any) {
   const facultyStats = apiData.facultyStats || {};
   const recentObs = apiData.recentObservations || [];
   const scores = apiData.scores || [];
+  const apiActions = apiData.actions || [];
+  const apiResearch = apiData.research || [];
   
   const facultyNames = Object.keys(facultyStats);
   const overallAvg = facultyNames.length > 0
@@ -265,14 +267,39 @@ export function transformApiData(apiData: any) {
     };
   });
 
+  // Build actions from API data
+  const actions = apiActions.map((a: any) => ({
+    issueId: a.issueId || 'N/A',
+    date: a.date || '',
+    issueType: a.issueType || '',
+    severity: a.severity || 'Medium',
+    description: a.description || '',
+    assignedTo: a.assignedTo || '',
+    targetDate: a.targetDate || '',
+    status: a.status || 'Open',
+    isOverdue: a.isOverdue || false
+  }));
+
+  // Update KPI open actions from real data
+  const openActions = actions.filter((a: any) => a.status === 'Open' || a.status === 'In Progress');
+  kpis.openActions = {
+    current: openActions.length,
+    critical: actions.filter((a: any) => a.severity === 'Critical').length,
+    high: actions.filter((a: any) => a.severity === 'High').length
+  };
+
+  // Build research list
+  const research = apiResearch;
+
   return {
     kpis,
     trends,
-    actions: [],
+    actions,
     alerts,
     recent,
     summary,
     instructors,
+    research,
     lastUpdated: apiData.lastUpdated || new Date().toISOString()
   };
 }
