@@ -41,6 +41,7 @@ function App() {
   const [apiUrlInput, setApiUrlInput] = useState(getApiUrl());
   const [refreshMinutes, setRefreshMinutes] = useState(getRefreshInterval());
   const [connectionError, setConnectionError] = useState('');
+  const [instructorData, setInstructorData] = useState(mockInstructorData);
 
   // Fetch data — tries live API first, falls back to demo
   const refreshData = async () => {
@@ -55,17 +56,23 @@ function App() {
         if (transformed && transformed.kpis && transformed.trends) {
           setData(transformed as DashboardData);
           setDataSource('live');
+          // Set live instructor data if available
+          if (transformed.instructors && transformed.instructors.length > 0) {
+            setInstructorData(transformed.instructors);
+          }
         } else {
           throw new Error('API returned data in unexpected format');
         }
       } else {
         setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
+        setInstructorData(mockInstructorData);
         setDataSource('demo');
       }
     } catch (err: any) {
       console.warn('API fetch failed, using demo data:', err?.message || 'Unknown error');
       setConnectionError(err?.message || 'Connection failed');
       setData({ ...mockDashboardData, lastUpdated: new Date().toISOString() });
+      setInstructorData(mockInstructorData);
       setDataSource('demo');
     }
 
@@ -424,8 +431,15 @@ function App() {
         {/* Instructors Tab */}
         {activeTab === 'instructors' && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Instructor Performance</h3>
-            <InstructorTable instructors={mockInstructorData} />
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Instructor Performance</h3>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                dataSource === 'live' ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+              }`}>
+                {dataSource === 'live' ? '● Live Data' : '● Demo Data'}
+              </span>
+            </div>
+            <InstructorTable instructors={instructorData} />
           </div>
         )}
 
