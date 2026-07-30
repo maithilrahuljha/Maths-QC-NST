@@ -137,6 +137,31 @@ export async function fetchLiveData(): Promise<any> {
 }
 
 /**
+ * Resolve an action item via Apps Script POST
+ */
+export async function resolveAction(issueId: string, resolution: string = 'Resolved via dashboard'): Promise<any> {
+  const url = getApiUrl();
+  if (!url) throw new Error('API URL not configured');
+
+  const response = await fetch(url, {
+    method: 'POST',
+    redirect: 'follow',
+    body: JSON.stringify({
+      action: 'resolveAction',
+      issueId: issueId,
+      resolution: resolution
+    })
+  });
+
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error('Invalid response from server');
+  }
+}
+
+/**
  * Transform Apps Script response into dashboard format
  */
 export function transformApiData(apiData: any) {
