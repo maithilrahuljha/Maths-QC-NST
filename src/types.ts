@@ -15,6 +15,7 @@ export interface KPIs {
   assessmentsReviewed: KPI;
   assessmentErrorRate: KPI;
   studentSatisfaction: KPI;
+  feedbackCount: KPI;
   openActions: {
     current: number;
     critical: number;
