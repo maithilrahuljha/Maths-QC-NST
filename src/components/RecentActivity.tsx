@@ -1,5 +1,5 @@
 import { RecentActivity } from '../types';
-import { formatDistanceToNow } from 'date-fns';
+import { safeFormatDistance } from '../utils/safeDate';
 
 interface RecentActivityListProps {
   activities: RecentActivity[];
@@ -29,7 +29,6 @@ export function RecentActivityList({ activities }: RecentActivityListProps) {
         <div
           key={index}
           className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-          style={{ animationDelay: `${index * 50}ms` }}
         >
           <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${getActivityStyles(activity.type)}`}>
             <span className="text-lg">{activity.icon}</span>
@@ -39,7 +38,7 @@ export function RecentActivityList({ activities }: RecentActivityListProps) {
               {activity.description}
             </p>
             <p className="text-xs text-gray-500 mt-0.5">
-              {formatDistanceToNow(new Date(activity.timestamp), { addSuffix: true })}
+              {safeFormatDistance(activity.timestamp)}
             </p>
           </div>
         </div>
