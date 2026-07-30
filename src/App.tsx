@@ -501,12 +501,19 @@ function App() {
                 </select>
               </div>
               <div className={`p-3 rounded-lg text-sm ${
-                isApiConfigured() ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'
+                dataSource === 'live' ? 'bg-green-50 text-green-700' : connectionError ? 'bg-red-50 text-red-700' : 'bg-amber-50 text-amber-700'
               }`}>
-                {isApiConfigured()
+                {dataSource === 'live'
                   ? '✅ Connected — Dashboard is showing live spreadsheet data'
-                  : '⚠️ Not connected — Dashboard is showing demo data'}
+                  : connectionError
+                    ? '❌ Connection failed — showing demo data'
+                    : '⚠️ Not connected — paste your Apps Script URL above'}
               </div>
+              {connectionError && (
+                <div className="p-3 bg-red-50 rounded-lg text-xs text-red-600 border border-red-200 whitespace-pre-wrap font-mono">
+                  {connectionError}
+                </div>
+              )}
             </div>
             <div className="flex justify-end gap-3 mt-6">
               <button
