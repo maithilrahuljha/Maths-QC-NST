@@ -1,6 +1,6 @@
 import { AlertTriangle, AlertCircle, Info, X } from 'lucide-react';
 import { Alert } from '../types';
-import { formatDistanceToNow } from 'date-fns';
+import { safeFormatDistance } from '../utils/safeDate';
 
 interface AlertsPanelProps {
   alerts: Alert[];
@@ -58,7 +58,7 @@ export function AlertsPanel({ alerts, onDismiss }: AlertsPanelProps) {
         return (
           <div
             key={index}
-            className={`${styles.bg} ${styles.border} border rounded-lg p-4 flex items-start gap-3 animate-fadeIn`}
+            className={`${styles.bg} ${styles.border} border rounded-lg p-4 flex items-start gap-3`}
           >
             <div className="flex-shrink-0 mt-0.5">{styles.icon}</div>
             <div className="flex-1 min-w-0">
@@ -67,7 +67,7 @@ export function AlertsPanel({ alerts, onDismiss }: AlertsPanelProps) {
                   {alert.category}
                 </span>
                 <span className="text-xs text-gray-500">
-                  {formatDistanceToNow(new Date(alert.timestamp), { addSuffix: true })}
+                  {safeFormatDistance(alert.timestamp)}
                 </span>
               </div>
               <p className={`text-sm ${styles.text}`}>{alert.message}</p>
